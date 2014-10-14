@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>LiBRE! - Welcome to liberator...</title>
+    </head>
+
+    <body>
+        <h1>Articles on dokuwiki</h1>
+        <ol>
+        {% for article in dokuwiki_articles %}
+            <li>{{ article.name }} - <a href={{ article.source }}> {{ article.source }} </a></li>
+        {% endfor %}
+        </ol>
+
+        <h1>Articles stored in liberator db</h1>
+
+        <ol>
+        {% for article in stored_articles %}
+            <li>{{ article.name }} - <a href={{ article.source }}> {{ article.source }} </a></li>
+        {% endfor %}
+        </ol>
+    </body>
+</html>
