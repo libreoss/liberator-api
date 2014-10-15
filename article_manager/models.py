@@ -4,9 +4,12 @@ from django.db import models
 class Article(models.Model):
     name = models.CharField(max_length=64)
     author = models.CharField(max_length=64)
-    source = models.URLField()
+    source = models.URLField(unique=True)
     contents_cyr = models.TextField()
     contents_lat = models.TextField()
 
     def __str__(self):
+        return self.name
+
+    def __unicode__(self):
         return self.name
