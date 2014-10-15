@@ -32,4 +32,3 @@ FAQ:
 ----
 - My user:pass for LiBRE! dokuwiki doesn't work in liberator!
   - Make sure that you create new user for accessing dokuwiki API and contact admins to give you permissions.
-  -
