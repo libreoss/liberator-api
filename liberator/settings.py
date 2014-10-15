@@ -84,4 +84,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DOKUWIKI_URL = "https://libre.lugons.org/wiki/"
-from settings_dist import *
+from .settings_dist import *
