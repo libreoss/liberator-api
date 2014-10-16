@@ -56,3 +56,8 @@ def articles_list(request):
                 'stored_articles' : stored_articles,
                 }
     return render(request, 'articles_list.html', context)
+
+def article_show(request, article_id):
+    article = Article.get(pk=int(article_id))
+    context = {"article": article}
+    return render(request, context, "article_view.html")

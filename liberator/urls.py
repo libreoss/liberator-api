@@ -7,5 +7,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^manager/', 'article_manager.views.articles_list'),
+    url(r"manager/articles/(?P<article_id>\d+)", "article_manager.views.article_view"),
     url(r'^admin/', include(admin.site.urls)),
 )
