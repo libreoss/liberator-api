@@ -104,9 +104,11 @@ class LibreManager(object):
 			l = LibreText(self.remote.page("wiki:" + page), "wiki:" + page) # try with namespace 
 		return l
 	
-	def getAllLinked(self, source): 
+	def getLocalLinks(self, source):
 		"""
-		Returns a list of LibreText objects which are all pages linked from specified page
+		Returns a list of all available links (local page ids) as strings
+
+		Example: ["wiki:page_a", "page_b", "namespace1:page_c"]
 		"""
 		res = []
 		links = self.remote.links(source) 
@@ -114,11 +116,21 @@ class LibreManager(object):
 			if link["type"] == "local": 
 				#print link["page"]
 				#print "getting page " + link["page"]
-				libretext = self.getPage(link["page"])
 				#print "Title: " + libretext.getTitle() 
 				#print
 				#print "Title: " + libretext.getTitle()
-				res.append(libretext)
+				res.append(link["page"])
+		return res
+
+	def getAllLinked(self, source): 
+		"""
+		Returns a list of LibreText objects which are all pages linked from specified page
+		"""
+		res = []
+		links = self.getLocalLinks(source)
+		for link in links:
+			libretext = self.getPage(link)
+			res.append(libretext)
 		return res
 
 
