@@ -57,7 +57,33 @@ def articles_list(request):
                 }
     return render(request, 'articles_list.html', context)
 
-def article_show(request, article_id):
+def article_view(request, article_id):
     article = Article.get(pk=int(article_id))
     context = {"article": article}
     return render(request, context, "article_view.html")
+
+def wiki_import(request, wiki_slug):
+    imported = 0
+    print("slug: " + wiki_slug)
+    remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
+    parsed_article = remote.getPage(wiki_slug)
+    
+    title = parsed_article.getTitle()
+    slug = wiki_slug 
+    author = parsed_article.getAuthor()
+    lat = parsed_article.getLatText()
+    cyr = ""
+    if parsed_article.isCyr():
+        cyr = parsed_article.getText()
+    if not Article.objects.filter(source = wiki_slug).exists() and cyr != "": # Check wether article already exists
+        # NOTE: This only works for articles with cyrilic version
+	# TODO Handle articles without cyrilic versions (it can cause problems with collisions etc...)
+	entry = Article()
+	entry.name = title
+	entry.author = author 
+	entry.source = slug 
+	entry.contents_lat = lat 
+	entry.contents_cyr = cyr
+	entry.save()
+	imported += 1 # increase number of imported articles in this view
+    return render(request, "wiki_import.html", {"imported": imported, "wiki_slug": wiki_slug})

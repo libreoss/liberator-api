@@ -7,7 +7,7 @@
         <h1>Articles on dokuwiki</h1>
         <ol>
         {% for article in dokuwiki_articles %}
-            <li>{{ article.name }} - <a href="https://libre.lugons.org/wiki/doku.php?id={{ article.source }}"> {{ article.source }} </a></li>
+            <li>{{ article.name }} - <a href="https://libre.lugons.org/wiki/doku.php?id={{ article.source }}"> {{ article.source }} </a> <a href={%url "wiki_import" article.source%}>Import to database</a></li>
         {% endfor %}
         </ol>
 
