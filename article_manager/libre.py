@@ -5,6 +5,10 @@ from dokuwiki.elements import LineElement
 from dokuwiki.dokuwikixmlrpc import DokuWikiClient 
 from dokuwiki.html import HTMLParser
 
+from translit import cir_lat_map
+from translit import cir_to_lat
+from translit import check_cyr 
+
 import re
 
 class LibreTextParser(Parser): 
@@ -55,6 +59,14 @@ class LibreText(object):
 		"""
 		return self.status == "PROVEREN"
 	
+	def isCyr(self): 
+		"""
+		Returns True if text is written in cyrilic script, False otherwise. 
+
+		NOTE: This method will check if 40% of characters is in cyrilic text
+		"""
+		return check_cyr(self.text)
+
 	def getId(self): 
 		return self.id
 
@@ -62,19 +74,25 @@ class LibreText(object):
 		"""
 		Returns text title
 		"""
-		return self.title 
+		return cir_to_lat(self.title)
 	
 	def getText(self): 
 		"""
 		Returns text
 		"""
 		return self.text 
+	
+	def getLatText(self): 
+		"""
+		Returns text forcing latin script
+		"""
+		return cir_to_lat(self.text)
 
 	def getAuthor(self): 
 		"""
 		Returns author information
 		"""
-		return self.author
+		return cir_to_lat(self.author)
 	def getStatusString(self): 
 		"""
 		Returns status as a string representation
