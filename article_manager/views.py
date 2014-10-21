@@ -38,7 +38,6 @@ def articles_list(request):
     for a in parsed_articles_lat: 
         if a.getTitle().strip() != "":
             # check whether it exists already as cyrilic article
-            # NOTE: In future this will be changed with database check 
             found = False 
             for e in dokuwiki_articles:
                 if a.getTitle() == e.name:
@@ -48,11 +47,14 @@ def articles_list(request):
                 entry.name = a.getTitle()
                 entry.author = a.getAuthor()
                 entry.contents_lat = a.getLatText()
-                entry.contents_cyr = "There are no cyrilic version right now."
+                entry.contents_cyr = ""
                 entry.source = a.getId()
                 dokuwiki_articles.append(entry)
-
-    context = { 'dokuwiki_articles' : dokuwiki_articles,
+    not_updated = [] # This is list for placing articles which have not been imported yet
+    for dokuwiki_article in dokuwiki_articles:
+	if not Article.objects.filter(source = dokuwiki_article.source).exists():
+		not_updated.append(dokuwiki_article)
+    context = { 'dokuwiki_articles' : not_updated,
                 'stored_articles' : stored_articles,
                 }
     return render(request, 'articles_list.html', context)
@@ -75,15 +77,36 @@ def wiki_import(request, wiki_slug):
     cyr = ""
     if parsed_article.isCyr():
         cyr = parsed_article.getText()
-    if not Article.objects.filter(source = wiki_slug).exists() and cyr != "": # Check wether article already exists
-        # NOTE: This only works for articles with cyrilic version
-	# TODO Handle articles without cyrilic versions (it can cause problems with collisions etc...)
-	entry = Article()
-	entry.name = title
-	entry.author = author 
-	entry.source = slug 
-	entry.contents_lat = lat 
-	entry.contents_cyr = cyr
-	entry.save()
-	imported += 1 # increase number of imported articles in this view
+    if not Article.objects.filter(source = wiki_slug).exists():
+	if cyr != "":
+		if Article.objects.filter(name = title).exists():
+			entry = Article.objects.get(name = title) 
+			entry.name = title
+			entry.author = author 
+			entry.source = slug 
+			entry.contents_lat = lat
+			entry.contents_cyr = cyr
+			entry.save()
+		else: 
+			entry = Article()
+			entry.name = title
+			entry.author = author 
+			entry.source = slug 
+			entry.contents_lat = lat
+			entry.contents_cyr = cyr
+			entry.save()
+		imported += 1 # increase number of imported articles in this view
+	else:
+		try: 
+			entry = Article.get(name = title)
+		except ObjectDoesNotExist:
+			entry = Article()
+			entry.name = title
+			entry.author = author 
+			entry.source = slug
+			entry.contents_lat = lat
+			entry.contents_cyr = cyr
+			entry.save()
+			imported += 1 
+	
     return render(request, "wiki_import.html", {"imported": imported, "wiki_slug": wiki_slug})
