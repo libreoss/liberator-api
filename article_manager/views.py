@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from article_manager.models import Article
+from article_manager.forms import ArticleForm
 
 from article_manager.libre import LibreManager
 
@@ -67,16 +68,42 @@ def article_view(request, article_id):
 def wiki_import(request, wiki_slug):
     imported = 0
     print("slug: " + wiki_slug)
-    remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
-    parsed_article = remote.getPage(wiki_slug)
+
     
-    title = parsed_article.getTitle()
-    slug = wiki_slug 
-    author = parsed_article.getAuthor()
-    lat = parsed_article.getLatText()
-    cyr = ""
-    if parsed_article.isCyr():
-        cyr = parsed_article.getText()
+    if request.method == "GET":
+	c = {}
+
+	remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
+        parsed_article = remote.getPage(wiki_slug)
+    
+        title = parsed_article.getTitle()
+        slug = wiki_slug 
+        author = parsed_article.getAuthor()
+        lat = parsed_article.getLatText()
+        cyr = ""
+        if parsed_article.isCyr():
+            cyr = parsed_article.getText()
+	entry = Article()
+	entry.name = title 
+	entry.author = author
+	entry.source = slug
+	entry.contents_lat = lat
+	entry.contents_cyr = cyr
+	form = ArticleForm(instance=entry)
+	#c["article_title"] = title
+	#c["article_slug"] = slug
+	#c["article_author"] = author
+	#c["article_lat"] = lat.replace("\n", "&#10;")
+	#c["article_cyr"] = cyr.replace("\n", "&#10;")
+        return render(request, "wiki_pre_import.html", {"form": form})
+    
+    form = ArticleForm(request.POST)
+    new = form.save(commit=False)
+    title = new.name
+    slug = new.source
+    author = new.author 
+    lat = new.contents_lat
+    cyr = new.contents_cyr
     if not Article.objects.filter(source = wiki_slug).exists():
 	if cyr != "":
 		if Article.objects.filter(name = title).exists():
@@ -108,5 +135,6 @@ def wiki_import(request, wiki_slug):
 			entry.contents_cyr = cyr
 			entry.save()
 			imported += 1 
+	
 	
     return render(request, "wiki_import.html", {"imported": imported, "wiki_slug": wiki_slug})
