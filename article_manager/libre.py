@@ -26,7 +26,7 @@ class LibreTextParser(Parser):
 			self.libre_status = text.strip()
 			return 
 		m = re.compile(r"(Autor|autor|autori|Autori|Аутор):? *(.*)") # check for author matching 
-		match = m.match(text) 
+		match = m.match(cir_to_lat(text)) 
 		if match: 
 			self.libre_author = match.group(2)
 			return 	
