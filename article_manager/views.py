@@ -61,9 +61,9 @@ def articles_list(request):
     return render(request, 'articles_list.html', context)
 
 def article_view(request, article_id):
-    article = Article.get(pk=int(article_id))
+    article = Article.objects.get(pk=int(article_id))
     context = {"article": article}
-    return render(request, context, "article_view.html")
+    return render(request, "article_view.html", context)
 
 def wiki_import(request, wiki_slug):
     imported = 0

@@ -15,7 +15,7 @@
 
         <ol>
         {% for article in stored_articles %}
-            <li>{{ article.name }} - <a href={{ article.source }}> {{ article.source }} </a></li>
+            <li><a href="{% url "article_view" article.pk %}">{{ article.name }}</a> - <a href=https://libre.lugons.org/wiki/doku.php?id={{ article.source }}> {{ article.source }} </a></li>
         {% endfor %}
         </ol>
     </body>
