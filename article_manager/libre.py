@@ -5,9 +5,9 @@ from dokuwiki.elements import LineElement
 from dokuwiki.dokuwikixmlrpc import DokuWikiClient 
 from dokuwiki.html import HTMLParser
 
-from translit import cir_lat_map
-from translit import cir_to_lat
-from translit import check_cyr 
+from article_manager.translit import cir_lat_map
+from article_manager.translit import cir_to_lat
+from article_manager.translit import check_cyr 
 
 import re
 
