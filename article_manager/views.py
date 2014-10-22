@@ -53,8 +53,8 @@ def articles_list(request):
                 dokuwiki_articles.append(entry)
     not_updated = [] # This is list for placing articles which have not been imported yet
     for dokuwiki_article in dokuwiki_articles:
-	if not Article.objects.filter(source = dokuwiki_article.source).exists():
-		not_updated.append(dokuwiki_article)
+        if not Article.objects.filter(source = dokuwiki_article.source).exists():
+            not_updated.append(dokuwiki_article)
     context = { 'dokuwiki_articles' : not_updated,
                 'stored_articles' : stored_articles,
                 }
@@ -71,11 +71,8 @@ def wiki_import(request, wiki_slug):
 
     
     if request.method == "GET":
-	c = {}
-
-	remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
+        remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
         parsed_article = remote.getPage(wiki_slug)
-    
         title = parsed_article.getTitle()
         slug = wiki_slug 
         author = parsed_article.getAuthor()
@@ -83,18 +80,18 @@ def wiki_import(request, wiki_slug):
         cyr = ""
         if parsed_article.isCyr():
             cyr = parsed_article.getText()
-	entry = Article()
-	entry.name = title 
-	entry.author = author
-	entry.source = slug
-	entry.contents_lat = lat
-	entry.contents_cyr = cyr
-	form = ArticleForm(instance=entry)
-	#c["article_title"] = title
-	#c["article_slug"] = slug
-	#c["article_author"] = author
-	#c["article_lat"] = lat.replace("\n", "&#10;")
-	#c["article_cyr"] = cyr.replace("\n", "&#10;")
+        entry = Article()
+        entry.name = title 
+        entry.author = author
+        entry.source = slug
+        entry.contents_lat = lat
+        entry.contents_cyr = cyr
+        form = ArticleForm(instance=entry)
+        #c["article_title"] = title
+        #c["article_slug"] = slug
+        #c["article_author"] = author
+        #c["article_lat"] = lat.replace("\n", "&#10;")
+        #c["article_cyr"] = cyr.replace("\n", "&#10;")
         return render(request, "wiki_pre_import.html", {"form": form})
     
     form = ArticleForm(request.POST)
@@ -105,36 +102,36 @@ def wiki_import(request, wiki_slug):
     lat = new.contents_lat
     cyr = new.contents_cyr
     if not Article.objects.filter(source = wiki_slug).exists():
-	if cyr != "":
-		if Article.objects.filter(name = title).exists():
-			entry = Article.objects.get(name = title) 
-			entry.name = title
-			entry.author = author 
-			entry.source = slug 
-			entry.contents_lat = lat
-			entry.contents_cyr = cyr
-			entry.save()
-		else: 
-			entry = Article()
-			entry.name = title
-			entry.author = author 
-			entry.source = slug 
-			entry.contents_lat = lat
-			entry.contents_cyr = cyr
-			entry.save()
-		imported += 1 # increase number of imported articles in this view
-	else:
-		try: 
-			entry = Article.get(name = title)
-		except ObjectDoesNotExist:
-			entry = Article()
-			entry.name = title
-			entry.author = author 
-			entry.source = slug
-			entry.contents_lat = lat
-			entry.contents_cyr = cyr
-			entry.save()
-			imported += 1 
-	
-	
+        if cyr != "":
+                if Article.objects.filter(name = title).exists():
+                        entry = Article.objects.get(name = title) 
+                        entry.name = title
+                        entry.author = author 
+                        entry.source = slug 
+                        entry.contents_lat = lat
+                        entry.contents_cyr = cyr
+                        entry.save()
+                else: 
+                        entry = Article()
+                        entry.name = title
+                        entry.author = author 
+                        entry.source = slug 
+                        entry.contents_lat = lat
+                        entry.contents_cyr = cyr
+                        entry.save()
+                imported += 1 # increase number of imported articles in this view
+        else:
+                try: 
+                        entry = Article.get(name = title)
+                except ObjectDoesNotExist:
+                        entry = Article()
+                        entry.name = title
+                        entry.author = author 
+                        entry.source = slug
+                        entry.contents_lat = lat
+                        entry.contents_cyr = cyr
+                        entry.save()
+                        imported += 1 
+        
+        
     return render(request, "wiki_import.html", {"imported": imported, "wiki_slug": wiki_slug})
