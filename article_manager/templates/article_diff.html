@@ -1,0 +1,36 @@
+<html>
+
+<head>
+<style>
+
+.plus {
+    background-color: green;
+}
+
+.minus {
+    background-color: red;
+}
+
+.wtf {
+    background-color: black; 
+    color: white; 
+}
+
+</style>
+</head>
+
+<body>
+{% for d in diff %}
+    {%if d|slice:":2" == "+ "%}
+        <div class="plus"> {{d}} </div>
+    {% elif d|slice:":2" == "- "%}
+        <div class="minus">{{d}}</div>
+    {% elif d|slice:":2" == "? "%}
+        <div class="wtf">{{d}}</div>
+    {%else%} 
+        <div>{{d|slice:"2:"}}</div>
+    {%endif%}
+{%endfor%}
+</body>
+
+</html>
