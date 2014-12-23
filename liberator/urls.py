@@ -10,5 +10,6 @@ urlpatterns = patterns('',
     url(r"^manager/articles/(?P<article_id>\d+)$", "article_manager.views.article_view", name="article_view"),
     url(r"^manager/import/(?P<wiki_slug>.+)", "article_manager.views.wiki_import", name="wiki_import"),
     url(r"^manager/articles/(?P<article_id>\d+)/diff", "article_manager.views.article_diff", name="article_diff"),
+    url(r"editor/new", "article_editor.views.article_submit", name="article_submit"),
     url(r'^admin/', include(admin.site.urls)),
 )
