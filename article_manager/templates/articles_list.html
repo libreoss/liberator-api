@@ -7,7 +7,11 @@
         <h1>Articles on dokuwiki</h1>
         <ol>
         {% for article in dokuwiki_articles %}
-            <li>{{ article.name }} - <a href="https://libre.lugons.org/wiki/doku.php?id={{ article.source }}"> {{ article.source }} </a> <a href={%url "wiki_import" article.source%}>Import to database</a></li>
+            <li>{{ article.name }} - 
+	    <a href="https://libre.lugons.org/wiki/doku.php?id={{ article.source_lat }}">Latin</a> 
+	    <a href="https://libre.lugons.org/wiki/doku.php?id={{ article.source_cyr }}">Cyrilic</a>
+	    <a href={%url "wiki_import" article.source_lat%}>Import to database</a>
+	    </li>
         {% endfor %}
         </ol>
 
@@ -15,7 +19,7 @@
 
         <ol>
         {% for article in stored_articles %}
-            <li><a href="{% url "article_view" article.pk %}">{{ article.name }}</a> - <a href=https://libre.lugons.org/wiki/doku.php?id={{ article.source }}> {{ article.source }} </a></li>
+            <li><a href="{% url "article_view" article.pk %}">{{ article.name }}</a></li>
         {% endfor %}
         </ol>
     </body>

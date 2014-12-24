@@ -35,7 +35,7 @@ def articles_list(request):
             entry.author = a.getAuthor()
             entry.contents_lat = a.getLatText() # TODO parse only contents without title, author and status, decide cyr vs lat
             entry.contents_cyr = a.getText()
-            entry.source = a.getId()
+            entry.source_cyr = a.getId()
             dokuwiki_articles.append(entry)
     # Now we can process articles from latin set and check whether they already exist
     for a in parsed_articles_lat: 
@@ -45,17 +45,18 @@ def articles_list(request):
             for e in dokuwiki_articles:
                 if a.getTitle() == e.name:
                     found = True
+                    e.source_lat = a.getId()
             if not found:
                 entry = Article()
                 entry.name = a.getTitle()
                 entry.author = a.getAuthor()
                 entry.contents_lat = a.getLatText()
                 entry.contents_cyr = ""
-                entry.source = a.getId()
+                entry.source_lat = a.getId()
                 dokuwiki_articles.append(entry)
     not_updated = [] # This is list for placing articles which have not been imported yet
     for dokuwiki_article in dokuwiki_articles:
-        if not Article.objects.filter(source = dokuwiki_article.source).exists():
+        if not Article.objects.filter(source_lat = dokuwiki_article.source_lat).exists():
             not_updated.append(dokuwiki_article)
     context = { 'dokuwiki_articles' : not_updated,
                 'stored_articles' : stored_articles,
@@ -71,7 +72,7 @@ def article_diff(request, article_id):
     article = Article.objects.get(pk= int(article_id))
     diff = [] 
     remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
-    wiki_article = remote.getPage(article.source)
+    wiki_article = remote.getPage(article.source_lat)
     t1 = []
     t2 = []
     if wiki_article.isCyr():
@@ -112,7 +113,7 @@ def wiki_import(request, wiki_slug):
         entry = Article()
         entry.name = title 
         entry.author = author
-        entry.source = slug
+        entry.source_lat = slug
         entry.contents_lat = lat
         entry.contents_cyr = cyr
         form = ArticleForm(instance=entry)
@@ -126,7 +127,7 @@ def wiki_import(request, wiki_slug):
     form = ArticleForm(request.POST)
     new = form.save(commit=False)
     title = new.name
-    slug = new.source
+    slug = new.source_lat
     author = new.author 
     lat = new.contents_lat
     cyr = new.contents_cyr
@@ -136,7 +137,7 @@ def wiki_import(request, wiki_slug):
                         entry = Article.objects.get(name = title) 
                         entry.name = title
                         entry.author = author 
-                        entry.source = slug 
+                        entry.source_lat = slug 
                         entry.contents_lat = lat
                         entry.contents_cyr = cyr
                         entry.save()
@@ -144,7 +145,7 @@ def wiki_import(request, wiki_slug):
                         entry = Article()
                         entry.name = title
                         entry.author = author 
-                        entry.source = slug 
+                        entry.source_lat = slug 
                         entry.contents_lat = lat
                         entry.contents_cyr = cyr
                         entry.save()
@@ -156,7 +157,7 @@ def wiki_import(request, wiki_slug):
                         entry = Article()
                         entry.name = title
                         entry.author = author 
-                        entry.source = slug
+                        entry.source_lat = slug
                         entry.contents_lat = lat
                         entry.contents_cyr = cyr
                         entry.save()

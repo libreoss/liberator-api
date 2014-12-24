@@ -4,6 +4,7 @@ import sys
 from dokuwiki.parsers import Parser, LineParser
 from dokuwiki.elements import LineElement
 
+
 cir_lat_map = {
         u"љ": u"lj", 
         u"њ": u"nj", 

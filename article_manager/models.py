@@ -4,7 +4,8 @@ from django.db import models
 class Article(models.Model):
     name = models.CharField(max_length=64)
     author = models.CharField(max_length=64)
-    source = models.CharField(unique=True, max_length=48)
+    source_lat = models.CharField(unique=True, max_length=48)
+    source_cyr = models.CharField(unique=True, max_length=48)
     contents_cyr = models.TextField()
     contents_lat = models.TextField()
 
