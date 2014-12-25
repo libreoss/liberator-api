@@ -108,6 +108,12 @@ class LibreText(object):
                 """
                 return self.html
 
+        def getLatHTML(self):
+            """
+            Returns HTML of article but forces latin text 
+            """
+            return cir_to_lat(self.html)
+
 
 class LibreManager(object): 
         
