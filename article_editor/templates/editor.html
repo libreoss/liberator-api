@@ -143,9 +143,9 @@ src="data:image/gif;base64,R0lGODlhFgAWAOMKAB1ChDRLY19vj3mOrpGjuaezxrCztb/I19Ha7
 <div id="textBox" contenteditable="true">
 {%if article%} 
 	{%if script == "cyr"%}
-		{{article.contents_cyr}}
+		{{article.contents_cyr|safe}}
 	{%else%}
-		{{article.contents_lat}}
+		{{article.contents_lat|safe}}
 	{%endif%}
 {% else %}
 	<p>Write some text here</p>
