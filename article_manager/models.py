@@ -51,3 +51,11 @@ class Article(models.Model):
         False otherwise 
         """
         return Article.objects.filter(name = self.name).exists()
+
+    def slugInDatabase(slug): 
+        """
+        Returns True if slug is in database 
+
+        False otherwise  
+        """
+        return Article.objects.filter(source_lat = slug).exists() or Article.objects.filter(source_cyr = slug).exists()
