@@ -8,18 +8,11 @@ var oDoc, sDefTxt;
 function initDoc() {
   oDoc = document.getElementById("textBox");
   sDefTxt = oDoc.innerHTML;
-  if (document.compForm.switchMode.checked) { setDocMode(true); }
+  //if (document.compForm.switchMode.checked) { setDocMode(true); }
 }
 
 function formatDoc(sCmd, sValue) {
-  if (validateMode()) { document.execCommand(sCmd, false, sValue); oDoc.focus(); }
-}
-
-function validateMode() {
-  if (!document.compForm.switchMode.checked) { return true ; }
-  alert("Uncheck \"Show HTML\".");
-  oDoc.focus();
-  return false;
+  document.execCommand(sCmd, false, sValue); oDoc.focus(); 
 }
 
 function setDocMode(bToSource) {
@@ -73,7 +66,7 @@ img.intLink { border: 0; }
 </head>
 
 <body onload="initDoc();">
-<form name="compForm" method="post" action="" onsubmit="if(validateMode()){this.myDoc.value=oDoc.innerHTML;return true;} return false;">
+<form name="compForm" method="post" action="" onsubmit="this.myDoc.value=oDoc.innerHTML;return true;">
 {%csrf_token%}
 
 <table>
