@@ -73,11 +73,11 @@ img.intLink { border: 0; }
 
 <tr>
 <td>Article Title:</td> 
-<td><input type="text" name="articleTitle">
+<td><input type="text" name="articleTitle" 
 {% if article%} 
-{{article.name}}
-{%endif%}
-</input></td>
+value="{{article.name}}"
+{%endif%} />
+</td>
 </tr>
 
 <tr>
