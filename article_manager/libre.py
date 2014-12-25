@@ -54,7 +54,7 @@ class LibreText(object):
                 for line in contents_blocks: 
                     html_parser.parse(line)
                 html_parser.finish()
-                self.html = html_parser.getOutput()
+                self.html = html_parser.output
                 self.text = text 
 
         def isChecked(self): 
