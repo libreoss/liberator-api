@@ -1,5 +1,9 @@
 from django.db import models
 
+from article_manager.libre import LibreManager 
+
+from django.conf import settings 
+
 # Create your models here.
 class Article(models.Model):
     name = models.CharField(max_length=64)
@@ -35,3 +39,7 @@ class Article(models.Model):
         entry.contents_lat = lat
         entry.contents_cyr = cyr
         return entry
+
+    def fromRemote(slug): 
+        remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
+        return self.fromDokuwikiArticle(remote.getPage(slug))
