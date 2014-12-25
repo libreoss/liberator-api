@@ -3,7 +3,8 @@
 <body>
 
 <a href="{% url "article_diff" article.pk %}">See difference between liberator article and current wiki article</a>
-
+<a href="{% url "article_submit" article.pk "lat"%}">Edit Lat</a>
+<a href="{% url "article_submit" article.pk "cyr"%}">Edit cyr</a>
 <h1>{{article.name}} </h1>
 
 <p>Author: {{article.author}}</p>

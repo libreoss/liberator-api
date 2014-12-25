@@ -7,7 +7,16 @@ def article_submit(request, article_id="", script=""):
         if request.method == "GET":
             return render(request, "editor.html", {"article": Article.objects.get(pk=int(article_id)), "script": script})
         else: 
-            pass # TODO Handle this case
+            document = request.POST["myDoc"]
+            title = request.POST["articleTitle"]
+            entry = Article(pk = int(article_id))
+            entry.name = title
+            if script == "cyr": 
+                entry.contents_cyr = document 
+            else: 
+                entry.contents_lat = document
+            entry.save()
+            return render(request, "show_document.html", {"doc": document})
     else:
         if request.method == "GET":
             return render(request, "editor.html", {})
