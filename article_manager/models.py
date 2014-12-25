@@ -43,3 +43,11 @@ class Article(models.Model):
     def fromRemote(slug): 
         remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
         return self.fromDokuwikiArticle(remote.getPage(slug))
+
+    def titleInDatabase(self): 
+        """
+        Returns True if there's article in database with same title
+
+        False otherwise 
+        """
+        return Article.objects.filter(name = self.name).exists()
