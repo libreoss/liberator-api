@@ -80,12 +80,21 @@ img.intLink { border: 0; }
 
 <tr>
 <td>Article Title:</td> 
-<td><input type="text" name="articleTitle" /></td>
+<td><input type="text" name="articleTitle">
+{% if article%} 
+{{article.name}}
+{%endif%}
+</input></td>
 </tr>
 
 <tr>
 <td>Author:</td>
-<td><i>will be auto-filled</i></td>
+{%if article%}
+{{article.author}}
+{%else%}
+<td><i>will be auto-filled</i>
+{%endif%}
+</td>
 </tr>
 
 </table>
@@ -138,7 +147,15 @@ here','http:\/\/');if(sLnk&&sLnk!=''&&sLnk!='http://'){formatDoc('createlink',sL
 src="data:image/gif;base64,R0lGODlhFgAWAOMKAB1ChDRLY19vj3mOrpGjuaezxrCztb/I19Ha7Pv8/f///////////////////////yH5BAEKAA8ALAAAAAAWABYAAARY8MlJq7046827/2BYIQVhHg9pEgVGIklyDEUBy/RlE4FQF4dCj2AQXAiJQDCWQCAEBwIioEMQBgSAFhDAGghGi9XgHAhMNoSZgJkJei33UESv2+/4vD4TAQA7" 
 />
 </div>
-<div id="textBox" contenteditable="true"><p></p></div>
+<div id="textBox" contenteditable="true">
+{%if article%} 
+	{%if script == "cyr"%}
+		{{article.contents_cyr}}
+	{%else%}
+		{{article.contents_lat}}
+	{%endif%}
+{%endif%}
+</div>
 <p><input type="submit" value="Send" /></p>
 </form>
 </body>
