@@ -16,11 +16,13 @@ def articles_list(request):
     
     links = remote.getLocalLinks("wiki:prikupljeni_clanci") # get all available links from dokuwiki
     
-    not_updated = [] # This is list for placing articles which have not been imported yet
+    to_import = [] # This is list for placing articles which have not been imported yet
     for link in links:
-        if not Article.slugInDatabase(link):
-            not_updated.append(link)
-    context = { 'dokuwiki_articles' : not_updated,
+        imported = Article.slugInDatabase(link)
+        if not imported: imported = Article.slugInDatabase("wiki:" + link) # Try with namespace 
+        if not imported:
+            to_import.append(link)
+    context = { 'dokuwiki_articles' : to_import,
                 'stored_articles' : stored_articles,
                 }
     return render(request, 'articles_list.html', context)
