@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from article_manager.models import Article
 from article_manager.forms import ArticleForm
@@ -57,73 +57,8 @@ def article_diff(request, article_id):
     context = {"diff": diff}
     return render(request, "article_diff.html", context)
 
-def wiki_import(request, wiki_slug):
-    imported = 0
-    print("slug: " + wiki_slug)
-
-    
+def wiki_import(request, wiki_slug, script):
     if request.method == "GET":
-        remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
-        parsed_article = remote.getPage(wiki_slug)
-        title = parsed_article.getTitle()
-        slug = wiki_slug 
-        author = parsed_article.getAuthor()
-        lat = parsed_article.getLatText()
-        cyr = ""
-        if parsed_article.isCyr():
-            cyr = parsed_article.getText()
-        entry = Article()
-        entry.name = title 
-        entry.author = author
-        entry.source_lat = slug
-        entry.contents_lat = lat
-        entry.contents_cyr = cyr
-        form = ArticleForm(instance=entry)
-        #c["article_title"] = title
-        #c["article_slug"] = slug
-        #c["article_author"] = author
-        #c["article_lat"] = lat.replace("\n", "&#10;")
-        #c["article_cyr"] = cyr.replace("\n", "&#10;")
-        return render(request, "wiki_pre_import.html", {"form": form})
-    
-    form = ArticleForm(request.POST)
-    new = form.save(commit=False)
-    title = new.name
-    slug = new.source_lat
-    author = new.author 
-    lat = new.contents_lat
-    cyr = new.contents_cyr
-    if not Article.objects.filter(source = wiki_slug).exists():
-        if cyr != "":
-                if Article.objects.filter(name = title).exists():
-                        entry = Article.objects.get(name = title) 
-                        entry.name = title
-                        entry.author = author 
-                        entry.source_lat = slug 
-                        entry.contents_lat = lat
-                        entry.contents_cyr = cyr
-                        entry.save()
-                else: 
-                        entry = Article()
-                        entry.name = title
-                        entry.author = author 
-                        entry.source_lat = slug 
-                        entry.contents_lat = lat
-                        entry.contents_cyr = cyr
-                        entry.save()
-                imported += 1 # increase number of imported articles in this view
-        else:
-                try: 
-                        entry = Article.get(name = title)
-                except ObjectDoesNotExist:
-                        entry = Article()
-                        entry.name = title
-                        entry.author = author 
-                        entry.source_lat = slug
-                        entry.contents_lat = lat
-                        entry.contents_cyr = cyr
-                        entry.save()
-                        imported += 1 
-        
-        
-    return render(request, "wiki_import.html", {"imported": imported, "wiki_slug": wiki_slug})
+        entry = Article.fromRemote(wiki_slug)
+        entry.save()
+        return redirect("article_submit", entry.pk, script)
