@@ -42,7 +42,7 @@ class Article(models.Model):
 
     def fromRemote(slug): 
         remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
-        return self.fromDokuwikiArticle(remote.getPage(slug))
+        return Article.fromDokuwikiArticle(remote.getPage(slug))
 
     def titleInDatabase(self): 
         """
