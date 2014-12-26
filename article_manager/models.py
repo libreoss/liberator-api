@@ -23,7 +23,7 @@ class Article(models.Model):
         title = article.getTitle()
         slug = article.getId() 
         author = article.getAuthor()
-        lat = parsed_article.getLatHTML()
+        lat = article.getLatHTML()
         cyr = ""
         if article.isCyr():
             cyr = article.getHTML()
