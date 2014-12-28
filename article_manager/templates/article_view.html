@@ -5,13 +5,20 @@
 <a href="{% url "article_diff" article.pk %}">See difference between liberator article and current wiki article</a>
 <a href="{% url "article_submit" article.pk "lat"%}">Edit Lat</a>
 <a href="{% url "article_submit" article.pk "cyr"%}">Edit cyr</a>
+<a href="{% url "article_delete" article.pk %}">Delete this article</a>
 <h1>{{article.name}} </h1>
 
 <p>Author: {{article.author}}</p>
 
-<code>{{article.contents_lat}}</code>
-<code>{{article.contents_cyr}}</code>
+<p>
+<h3>Latin</h3>
+{{article.contents_lat|safe}}
+</p>
 
+<p>
+<h3>Cyrilic</h3>
+{{article.contents_cyr|safe}}
+</p>
 </body>
 
 </html>

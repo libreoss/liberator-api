@@ -34,6 +34,11 @@ def article_view(request, article_id):
     context = {"article": article}
     return render(request, "article_view.html", context)
 
+def article_delete(request, article_id):
+    article = Article.objects.get(pk=int(article_id))
+    article.delete()
+    return redirect("article_list")
+
 def article_diff(request, article_id):
     article = Article.objects.get(pk= int(article_id))
     diff = [] 
