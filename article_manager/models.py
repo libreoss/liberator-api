@@ -42,15 +42,25 @@ class Article(models.Model):
 
     def fromRemote(slug): 
         remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
-        return Article.fromDokuwikiArticle(remote.getPage(slug))
+        entry = Article.fromDokuwikiArticle(remote.getPage(slug))
+        entry.wiki_slug = slug
+        return entry
 
     def titleInDatabase(self): 
         """
-        Returns True if there's article in database with same title
+        Returns Article object with same title if it exists
 
-        False otherwise 
+        None otherwise
+
+        NOTE: This can be also used to check wether title exists in database
         """
-        return Article.objects.filter(name = self.name).exists()
+        try:
+            if Article.objects.filter(name = self.name).exists():
+                return Article.objects.get(name = self.name)
+            else: 
+                return None 
+        except Exception:
+            return None # TODO Better handle this case
 
     def slugInDatabase(slug): 
         """

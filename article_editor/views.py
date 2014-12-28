@@ -9,7 +9,7 @@ def article_submit(request, article_id="", script=""):
         else: 
             document = request.POST["myDoc"]
             title = request.POST["articleTitle"]
-            entry = Article(pk = int(article_id))
+            entry = Article.objects.get(pk = article_id)
             entry.name = title
             if script == "cyr": 
                 entry.contents_cyr = document 
