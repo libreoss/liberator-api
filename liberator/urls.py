@@ -15,5 +15,6 @@ urlpatterns = patterns('',
     url(r"^editor/new", "article_editor.views.article_submit", name="article_submit"),
     url(r"^editor/(?P<article_id>\d+)/(?P<script>lat|cyr)", "article_editor.views.article_submit", name="article_submit"),
     url(r"^login", "author_manager.views.author_login", name="author_login"),
+    url(r"^logout", "author_manager.views.author_logout", name="author_logout"),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -6,7 +6,7 @@
     <body>
 
     {% if user.is_authenticated %} 
-    	Logged in 
+    	Logged in <a href="{% url "author_logout"%}">Log out</a>
     {% else %}
     	<a href="{% url "author_login"%}">Log in</a>
     {% endif %}
