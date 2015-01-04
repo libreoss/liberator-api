@@ -14,5 +14,6 @@ urlpatterns = patterns('',
     url(r"^manager/articles/(?P<article_id>\d+)/diff", "article_manager.views.article_diff", name="article_diff"),
     url(r"^editor/new", "article_editor.views.article_submit", name="article_submit"),
     url(r"^editor/(?P<article_id>\d+)/(?P<script>lat|cyr)", "article_editor.views.article_submit", name="article_submit"),
+    url(r"^login", "author_manager.views.author_login", name="author_login"),
     url(r'^admin/', include(admin.site.urls)),
 )

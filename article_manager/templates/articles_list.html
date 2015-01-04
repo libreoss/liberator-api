@@ -4,6 +4,12 @@
     </head>
 
     <body>
+
+    {% if user.is_authenticated %} 
+    	Logged in 
+    {% else %}
+    	<a href="{% url "author_login"%}">Log in</a>
+    {% endif %}
         <h1>Articles on dokuwiki</h1>
         <ol>
         {% for article in dokuwiki_articles %}
