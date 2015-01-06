@@ -82,12 +82,13 @@ value="{{article.name}}"
 
 <tr>
 <td>Author:</td>
-{%if article%}
-{{article.author}}
-{%else%}
-<td><i>will be auto-filled</i>
-{%endif%}
-</td>
+<td><input type="text" name="articleAuthor" value="
+{% if article.author %}
+{{article.author.username}}
+{% else %}
+{{ user.username }}
+{% endif%}
+" />
 </tr>
 
 </table>

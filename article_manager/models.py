@@ -2,6 +2,8 @@ from django.db import models
 
 from article_manager.libre import LibreManager 
 
+from django.contrib.auth.models import User as Author
+
 from django.conf import settings 
 
 # Create your models here.
@@ -12,6 +14,7 @@ class Article(models.Model):
     source_cyr = models.CharField(max_length=48)
     contents_cyr = models.TextField()
     contents_lat = models.TextField()
+    author = models.ForeignKey(Author)
 
     def __str__(self):
         return self.name
@@ -22,7 +25,10 @@ class Article(models.Model):
     def fromDokuwikiArticle(article): 
         title = article.getTitle()
         slug = article.getId() 
-        author = article.getAuthor()
+        try:
+            author = Author.objects.get(username = article.getAuthor())
+        except Author.DoesNotExist:
+            author = Author.objects.get(username = "nobody")
         lat = article.getLatHTML()
         cyr = ""
         if article.isCyr():
