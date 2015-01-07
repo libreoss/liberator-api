@@ -14,6 +14,7 @@ class Article(models.Model):
     contents_cyr = models.TextField()
     contents_lat = models.TextField()
     author = models.ForeignKey(Author)
+    stage = models.IntegerField()
 
     def __str__(self):
         return self.name
