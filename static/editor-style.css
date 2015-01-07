@@ -1,0 +1,22 @@
+
+.intLink { cursor: pointer; }
+img.intLink { border: 0; }
+#textBox {
+  width: 75%;
+  height: 200px;
+  border: 1px #000000 solid;
+  padding: 12px;
+  overflow: scroll;
+}
+#textBox #sourceText {
+  padding: 0;
+  margin: 0;
+  min-width: 498px;
+  min-height: 200px;
+}
+#editMode label { cursor: pointer; }
+
+#toolBar 
+{
+  background-color: blue; 
+}

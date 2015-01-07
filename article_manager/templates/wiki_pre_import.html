@@ -1,8 +1,7 @@
-<html>
+{%extends "base.html" %}
 
-<head></head>
+{% block content %}
 
-<body>
 <table>
 <form method="POST">{%csrf_token%}
 {{form}}
@@ -11,7 +10,4 @@
 <input type="submit"/>
 </form>
 
-</body>
-
-
-</html>
+{% endblock %}

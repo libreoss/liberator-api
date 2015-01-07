@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}Liberator{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{%static "style.css"%}">
+  <link rel="stylesheet" href="{%static "editor-style.css"%}">
+  <script src="{%static "editor.js" %}"></script>
+</head>
+
+<body {%block body_attributes%} {%enblock%}>
+
+<div id="header">
+<h1>Liberator</h2>
+
+<table id="mainmenu">
+<tr>
+<td><a href="{% url "article_submit"%}">New article</a></td>
+<td><a href="{% url "article_list" %}">Article list</a></td>
+</tr>
+</table>
+
+<div id="profile">
+
+{% if user.is_authenticated %} 
+{{user.username}}
+<a href="{%url "author_logout"%}">Logout</a>
+{%else%}
+<a href="{% url "author_login"%}">Login</a>
+{%endif%}
+</div>
+</div>
+
+<div class="container">
+
+{%block content%}
+
+{%endblock%}
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
-<html>
+{%extends "base.html" %}
 
-<body>
+{% block content %}
 
 <a href="{% url "article_diff" article.pk %}">See difference between liberator article and current wiki article</a>
 <a href="{% url "article_submit" article.pk "lat"%}">Edit Lat</a>
@@ -19,6 +19,6 @@
 <h3>Cyrilic</h3>
 {{article.contents_cyr|safe}}
 </p>
-</body>
 
-</html>
+
+{% endblock %}

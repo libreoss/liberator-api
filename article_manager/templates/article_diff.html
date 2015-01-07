@@ -1,25 +1,7 @@
-<html>
+{%extend "base.html" %}
 
-<head>
-<style>
+{% block content %}
 
-.plus {
-    background-color: green;
-}
-
-.minus {
-    background-color: red;
-}
-
-.wtf {
-    background-color: black; 
-    color: white; 
-}
-
-</style>
-</head>
-
-<body>
 {% for d in diff %}
     {%if d|slice:":2" == "+ "%}
         <div class="plus"> {{d}} </div>
@@ -31,6 +13,5 @@
         <div>{{d|slice:"2:"}}</div>
     {%endif%}
 {%endfor%}
-</body>
 
-</html>
+{% endblock %}

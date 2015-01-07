@@ -1,15 +1,8 @@
-<html>
-    <head>
-        <title>LiBRE! - Welcome to liberator...</title>
-    </head>
+    
+{%extends "base.html" %}
 
-    <body>
+{%block content %}
 
-    {% if user.is_authenticated %} 
-    	Logged in <a href="{% url "author_logout"%}">Log out</a>
-    {% else %}
-    	<a href="{% url "author_login"%}">Log in</a>
-    {% endif %}
         <h1>Articles on dokuwiki</h1>
         <ol>
         {% for article in dokuwiki_articles %}
@@ -32,5 +25,5 @@
             <li><a href="{% url "article_view" article.pk %}">{{ article.name }}</a></li>
         {% endfor %}
         </ol>
-    </body>
-</html>
+
+{%endblock %}

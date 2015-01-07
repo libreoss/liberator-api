@@ -1,71 +1,12 @@
-<!doctype html>
-<html>
-<head>
-<title>Rich Text Editor</title>
-<script type="text/javascript">
-var oDoc, sDefTxt;
+{%extends "base.html" %}
 
-function initDoc() {
-  oDoc = document.getElementById("textBox");
-  sDefTxt = oDoc.innerHTML;
-  //if (document.compForm.switchMode.checked) { setDocMode(true); }
-}
+{%block body_attributes %}
+onload="initDoc();"
+{%endblock%}
 
-function formatDoc(sCmd, sValue) {
-  document.execCommand(sCmd, false, sValue); oDoc.focus(); 
-}
 
-function setDocMode(bToSource) {
-  var oContent;
-  if (bToSource) {
-    oContent = document.createTextNode(oDoc.innerHTML);
-    oDoc.innerHTML = "";
-    var oPre = document.createElement("pre");
-    oDoc.contentEditable = false;
-    oPre.id = "sourceText";
-    oPre.contentEditable = true;
-    oPre.appendChild(oContent);
-    oDoc.appendChild(oPre);
-  } else {
-    if (document.all) {
-      oDoc.innerHTML = oDoc.innerText;
-    } else {
-      oContent = document.createRange();
-      oContent.selectNodeContents(oDoc.firstChild);
-      oDoc.innerHTML = oContent.toString();
-    }
-    oDoc.contentEditable = true;
-  }
-  oDoc.focus();
-}
-</script>
+{% block content %}
 
-<style type="text/css">
-.intLink { cursor: pointer; }
-img.intLink { border: 0; }
-#textBox {
-  width: 75%;
-  height: 200px;
-  border: 1px #000000 solid;
-  padding: 12px;
-  overflow: scroll;
-}
-#textBox #sourceText {
-  padding: 0;
-  margin: 0;
-  min-width: 498px;
-  min-height: 200px;
-}
-#editMode label { cursor: pointer; }
-
-#toolBar 
-{
-  background-color: blue; 
-}
-</style>
-</head>
-
-<body onload="initDoc();">
 <form name="compForm" method="post" action="" onsubmit="this.myDoc.value=oDoc.innerHTML;return true;">
 {%csrf_token%}
 
@@ -154,5 +95,5 @@ src="data:image/gif;base64,R0lGODlhFgAWAOMKAB1ChDRLY19vj3mOrpGjuaezxrCztb/I19Ha7
 </div>
 <p><input type="submit" value="Send" /></p>
 </form>
-</body>
 
+{% endblock %}
