@@ -9,7 +9,6 @@ from django.conf import settings
 # Create your models here.
 class Article(models.Model):
     name = models.CharField(max_length=64)
-    author = models.CharField(max_length=64)
     source_lat = models.CharField(max_length=48)
     source_cyr = models.CharField(max_length=48)
     contents_cyr = models.TextField()
