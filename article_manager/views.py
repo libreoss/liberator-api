@@ -21,9 +21,9 @@ def articles_list(request):
         imported = Article.slugInDatabase(link)
         if not imported: imported = Article.slugInDatabase("wiki:" + link) # Try with namespace 
         if not imported:
-            w = Article.fromRemote(link)
-            w.article_with_same_title = w.titleInDatabase()
-            to_import.append(w)
+            #w = Article.fromRemote(link)
+            #w.article_with_same_title = w.titleInDatabase()
+            to_import.append(link)
     context = { 'dokuwiki_articles' : to_import,
                 'stored_articles' : stored_articles,
                 }
@@ -74,7 +74,13 @@ def wiki_import(request, wiki_slug, script):
 
 def wiki_extend(request, wiki_slug, article_id, script):
     wiki = Article.fromRemote(wiki_slug)
-    entry = Article.objects.get(pk = int(article_id))
+    entry = None
+    if article_id == "auto":
+        entry = wiki.titleInDatabase()
+    else: 
+        entry = Article.objects.get(pk = int(article_id))
+    if not entry:
+        return redirect("article_list") # TODO redirect to the error message
     if script == "lat": 
         entry.contents_lat = wiki.contents_lat 
         entry.source_lat = wiki.source_lat 
