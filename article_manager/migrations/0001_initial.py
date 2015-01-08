@@ -15,12 +15,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Article',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
                 ('name', models.CharField(max_length=64)),
                 ('source_lat', models.CharField(max_length=48)),
                 ('source_cyr', models.CharField(max_length=48)),
                 ('contents_cyr', models.TextField()),
                 ('contents_lat', models.TextField()),
+                ('stage', models.IntegerField(default=0)),
                 ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
