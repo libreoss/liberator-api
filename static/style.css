@@ -1,5 +1,5 @@
 
-.header 
+#header 
 {
 	background-color: #006BB2;
 	color: white;
@@ -7,7 +7,7 @@
 	padding-bottom: 10px;
 }
 
-.header .mainmenu a 
+#header #mainmenu a 
 {
 	color: white; 
 	text-decoration: none; 
