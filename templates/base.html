@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,12 +6,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{%static "style.css"%}">
-  <link rel="stylesheet" href="{%static "editor-style.css"%}">
-  <script src="{%static "editor.js" %}"></script>
+  <link rel="stylesheet" href="{% static "style.css"%}">
+  <link rel="stylesheet" href="{% static "editor-style.css"%}">
+  <script src="{% static "editor.js" %}"></script>
 </head>
 
-<body {%block body_attributes%} {%enblock%}>
+<body {%block body_attributes%} {%endblock%}>
 
 <div id="header">
 <h1>Liberator</h2>
@@ -24,7 +25,7 @@
 
 <div id="profile">
 
-{% if user.is_authenticated %} 
+{% if user.is_authenticated %}
 {{user.username}}
 <a href="{%url "author_logout"%}">Logout</a>
 {%else%}
