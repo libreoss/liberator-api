@@ -1,4 +1,4 @@
-    
+
 {%extends "base.html" %}
 
 {%block content %}
@@ -7,7 +7,7 @@
         <ol>
         {% for article in dokuwiki_articles %}
             <li>
-	    <a href="https://libre.lugons.org/wiki/doku.php?id={{ article.wiki_slug}}">{{article.name}}</a> 
+	    <a href="https://libre.lugons.org/wiki/doku.php?id={{ article.wiki_slug}}">{{article.name}}</a>
 	    <a href={%url "wiki_import" article.wiki_slug "lat"%}>Import to database (lat)</a>
 	    <a href={%url "wiki_import" article.wiki_slug "cyr"%}>Import to database (cyr)</a>
 	    {% if article.article_with_same_title%}

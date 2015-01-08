@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'article_manager',
-    'article_editor', 
+    'article_editor',
     'author_manager'
 )
 
@@ -84,6 +84,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Template loaders stuff
+TEMPLATE_DIRS = (
+    'templates',
+        )
 
 DOKUWIKI_URL = "https://libre.lugons.org/wiki/"
 from .settings_dist import *
