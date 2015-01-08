@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
-{% block contents %}
-
+{% block content %}
+<h1>Login </h1>
 
 <form action="" method="post">
 {% csrf_token %}
-Username: <input type="text" name="username" /> <br>
 
-Password: <input type="password" name="password" /> <br>
+<input type="text" name="username" class="form-control" placeholder="Username"/>
 
-<input type="submit">Send</input>
+<input type="password" name="password" class="form-control" placeholder="Password"/>
 
+<input type="submit" value="login"/>
 </form>
 
 {% endblock %}
