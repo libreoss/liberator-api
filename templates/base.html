@@ -14,7 +14,9 @@
 <body {%block body_attributes%} {%endblock%}>
 
 <div id="header">
+<div id="logo">
 <h1>Liberator</h2>
+</div>
 
 <table id="mainmenu">
 <tr>
@@ -25,12 +27,15 @@
 
 <div id="profile">
 
+<table>
+<tr>
 {% if user.is_authenticated %}
-{{user.username}}
-<a href="{%url "author_logout"%}">Logout</a>
+<td>{{user.username}}</td>
+<td><a href="{%url "author_logout"%}">Logout</a></td>
 {%else%}
-<a href="{% url "author_login"%}">Login</a>
+<td><a href="{% url "author_login"%}">Login</a></td>
 {%endif%}
+</table>
 </div>
 </div>
 

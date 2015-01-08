@@ -3,13 +3,34 @@
 {
 	background-color: #006BB2;
 	color: white;
-	padding-top:10px;
+	padding:10px;
 	padding-bottom: 10px;
 }
 
-#header #mainmenu a 
+#header * 
+{
+	margin: 10px; 
+}
+
+#header a 
 {
 	color: white; 
 	text-decoration: none; 
 	display: block; 
 }
+
+#header #logo 
+{
+	float: left; 
+}
+
+#header #mainmenu 
+{
+	float: left; 
+}
+
+#header #profile 
+{
+	text-align: right; 
+}
+
