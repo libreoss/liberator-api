@@ -58,3 +58,6 @@ target/
 
 #custom settings
 liberator/settings_dist.py
+
+# ignore migrations 
+*/migrations/
