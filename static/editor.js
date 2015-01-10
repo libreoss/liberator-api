@@ -34,3 +34,15 @@ function setDocMode(bToSource) {
   }
   oDoc.focus();
 }
+
+function toggle(e) 
+{
+	if (e.parentNode.style.backgroundColor === "inherit") 
+	{
+		e.parentNode.style.backgroundColor = "green"
+	}
+	else 
+	{
+		e.parentNode.style.backgroundColor = "inherit"
+	}
+}
