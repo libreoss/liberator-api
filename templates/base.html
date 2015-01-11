@@ -13,31 +13,28 @@
 
 <body {%block body_attributes%} {%endblock%}>
 
-<div id="header">
-<div id="logo">
-<h1>Liberator</h2>
-</div>
 
-<table id="mainmenu">
-<tr>
-<td><a href="{% url "article_submit"%}">New article</a></td>
-<td><a href="{% url "article_list" %}">Article list</a></td>
-</tr>
-</table>
 
-<div id="profile">
+<nav id="base-navigation" class="navbar navbar-default">
+<div class="container-fluid">
+<a class="navbar-brand" href="#">Liberator</a>
+<ul class="nav navbar-nav">
+	<li><a href="{% url "article_list" %}">List articles</a></li>
+	<li><a href="{% url "article_submit"%}">Create new article</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+	{% if user.is_authenticated%} 
+		<li>{{user.username}}</li>
+		<li><a href="{% url "author_logout"%}">Logout</a></li>
+	{% else %}
+		<li><a href="{%url "author_login"%}">Login</a></li>
+	{% endif %}
+</ul>
+</div>
+</nav>
+		
 
-<table>
-<tr>
-{% if user.is_authenticated %}
-<td>{{user.username}}</td>
-<td><a href="{%url "author_logout"%}">Logout</a></td>
-{%else%}
-<td><a href="{% url "author_login"%}">Login</a></td>
-{%endif%}
-</table>
-</div>
-</div>
+
 
 <div class="container">
 
