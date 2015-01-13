@@ -2,13 +2,24 @@
 
 {% block content %}
 
-<a href="{% url "article_diff" article.pk %}">See difference between liberator article and current wiki article</a>
-<a href="{% url "article_submit" article.pk "lat"%}">Edit Lat</a>
-<a href="{% url "article_submit" article.pk "cyr"%}">Edit cyr</a>
-<a href="{% url "article_delete" article.pk %}">Delete this article</a>
+
+<div class="row">
+<div class="col-sm-4">
 <h1>{{article.name}} </h1>
 
 <p>Author: {{article.author}}</p>
+</div>
+<div class="col-sm-8">
+
+<ul>
+<li><a href="{% url "article_diff" article.pk %}">See difference between liberator article and current wiki article</a></li>
+<li><a href="{% url "article_submit" article.pk "lat"%}">Edit Lat</a></li>
+<li><a href="{% url "article_submit" article.pk "cyr"%}">Edit cyr</a></li>
+<li><a href="{% url "article_delete" article.pk %}">Delete this article</a></li>
+</ul>
+
+</div>
+</div>
 
 <ul class="nav nav-pills">
 <li id="lat-activator" role="presentation" ><a href="#" onclick='
@@ -29,6 +40,8 @@ document.getElementById("cyr-activator").className="active";
 <div id="article-content-area"> 
 
 </div>
+
+
 
 <div class="article-content" id="article-content-lat" hidden>
 {{article.contents_lat|safe}}
