@@ -10,15 +10,33 @@
 
 <p>Author: {{article.author}}</p>
 
-<p>
-<h3>Latin</h3>
-{{article.contents_lat|safe}}
-</p>
+<ul class="nav nav-pills">
+<li id="lat-activator" role="presentation" ><a href="#" onclick='
+document.getElementById("article-content-area").innerHTML = document.getElementById("article-content-lat").innerHTML;
 
-<p>
-<h3>Cyrilic</h3>
+document.getElementById("lat-activator").className="active";
+document.getElementById("cyr-activator").className="";
+'>Latin</a></li>
+
+<li id="cyr-activator" role="presentation" ><a href="#" onclick='
+document.getElementById("article-content-area").innerHTML = document.getElementById("article-content-cyr").innerHTML;
+
+document.getElementById("lat-activator").className="";
+document.getElementById("cyr-activator").className="active";
+'>Cyrilic</a></li>
+</ul>
+
+<div id="article-content-area"> 
+
+</div>
+
+<div class="article-content" id="article-content-lat" hidden>
+{{article.contents_lat|safe}}
+</div> 
+
+<div class="article-content" id="article-content-cyr" hidden>
 {{article.contents_cyr|safe}}
-</p>
+</div>
 
 
 {% endblock %}
