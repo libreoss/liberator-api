@@ -28,10 +28,11 @@ def article_submit(request, article_id="", script=""):
             document = request.POST["myDoc"]
             title = request.POST["articleTitle"]
             author = request.POST["articleAuthor"]
-            entry = Article()
-            entry.name = title
-            entry.author = Author.objects.get(username = author)
-            entry.contents_lat = document 
-            entry.save()
+            if author.strip() and title.strip(): # Check are title and authors fields populated
+                entry = Article()
+                entry.name = title
+                entry.author = Author.objects.get(username = author)
+                entry.contents_lat = document 
+                entry.save()
             return render(request, "show_document.html", {"doc": document})
 
