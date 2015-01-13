@@ -4,6 +4,9 @@ from django.contrib.auth.models import User as Author
 
 from article_manager.models import Article
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def article_submit(request, article_id="", script=""):
     if article_id != "": 
         if request.method == "GET":

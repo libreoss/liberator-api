@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 
+from django.contrib.auth.decorators import login_required
+
 def author_login(request): 
     if request.method == "GET": 
         return render(request, "login.html", {})
@@ -15,6 +17,7 @@ def author_login(request):
                 login(request, user) 
                 return  redirect("article_list")
 
+@login_required
 def author_logout(request): 
     logout(request) 
     return redirect("article_list")

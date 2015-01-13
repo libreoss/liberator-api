@@ -9,7 +9,10 @@ from django.conf import settings
 
 from difflib import Differ
 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+@login_required
 def articles_list(request):
     stored_articles = Article.objects.all()
     remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
@@ -29,16 +32,19 @@ def articles_list(request):
                 }
     return render(request, 'articles_list.html', context)
 
+@login_required
 def article_view(request, article_id):
     article = Article.objects.get(pk=int(article_id))
     context = {"article": article}
     return render(request, "article_view.html", context)
 
+@login_required
 def article_delete(request, article_id):
     article = Article.objects.get(pk=int(article_id))
     article.delete()
     return redirect("article_list")
 
+@login_required
 def article_diff(request, article_id):
     article = Article.objects.get(pk= int(article_id))
     diff = [] 
@@ -66,12 +72,14 @@ def article_diff(request, article_id):
     context = {"diff": diff}
     return render(request, "article_diff.html", context)
 
+@login_required
 def wiki_import(request, wiki_slug, script):
     if request.method == "GET":
         entry = Article.fromRemote(wiki_slug)
         entry.save()
         return redirect("article_submit", entry.pk, script)
 
+@login_required
 def wiki_extend(request, wiki_slug, article_id, script):
     wiki = Article.fromRemote(wiki_slug)
     entry = None
