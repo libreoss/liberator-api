@@ -15,6 +15,7 @@ def article_submit(request, article_id="", script=""):
             document = request.POST["myDoc"]
             title = request.POST["articleTitle"]
             author = request.POST["articleAuthor"]
+            stage = request.POST["articleStage"]
             entry = Article.objects.get(pk = article_id)
             entry.name = title
             if script == "cyr": 
@@ -22,6 +23,7 @@ def article_submit(request, article_id="", script=""):
             else: 
                 entry.contents_lat = document
             entry.author = Author.objects.get(username = author)
+            entry.stage = stage
             entry.save()
             return render(request, "show_document.html", {"doc": document})
     else:
@@ -31,10 +33,12 @@ def article_submit(request, article_id="", script=""):
             document = request.POST["myDoc"]
             title = request.POST["articleTitle"]
             author = request.POST["articleAuthor"]
+            stage = request.POST["articleStage"]
             if author.strip() and title.strip(): # Check are title and authors fields populated
                 entry = Article()
                 entry.name = title
                 entry.author = Author.objects.get(username = author)
+                entry.stage = stage
                 entry.contents_lat = document 
                 entry.save()
             return render(request, "show_document.html", {"doc": document})

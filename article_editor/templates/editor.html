@@ -32,6 +32,14 @@ value="{{article.name}}"
 " />
 </tr>
 
+<tr>
+<td>Stage:</td>
+<td><input type="text" name="articleStage" 
+{% if article %}
+value="{{article.stage}}" 
+{%endif%}
+/></td>
+</tr>
 </table>
 
 <input type="hidden" name="myDoc">
