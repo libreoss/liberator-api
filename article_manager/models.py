@@ -78,5 +78,19 @@ class Article(models.Model):
         """
         return Article.objects.filter(source_lat = slug).exists() or Article.objects.filter(source_cyr = slug).exists()
 
+    def approve(self, cat, issue): 
+        """
+        This is method used when approving articles, each article has to contain its assigned issue and category, these are 
+        provided by arguments cat and issue. 
+
+        cat - Category object representing particular category 
+        issue: integer representing issue number 
+
+        This method modifies object. 
+
+        """
+        self.issue = issue
+        self.category = cat
+
 def Category(models.Model): 
     name = models.CharField(max_length=64)
