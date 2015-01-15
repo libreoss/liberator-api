@@ -40,6 +40,18 @@ value="{{article.stage}}"
 {%endif%}
 /></td>
 </tr>
+
+{% if not script %}
+<tr> 
+<td>Script</td>
+<td>
+<select name="articleScript">
+<option value="lat">Latin</option>
+<option value="cyr">Cyrilic</option> 
+</select>
+</td>
+</tr>
+{% endif %}
 </table>
 
 <input type="hidden" name="myDoc">

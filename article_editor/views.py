@@ -34,12 +34,16 @@ def article_submit(request, article_id="", script=""):
             title = request.POST["articleTitle"]
             author = request.POST["articleAuthor"]
             stage = request.POST["articleStage"]
+            script = request.POST["articleScript"]
             if author.strip() and title.strip(): # Check are title and authors fields populated
                 entry = Article()
                 entry.name = title
                 entry.author = Author.objects.get(username = author)
                 entry.stage = stage
-                entry.contents_lat = document 
+                if script == "lat":
+                    entry.contents_lat = document 
+                else: 
+                    entry.contents_cyr = document 
                 entry.save()
             return render(request, "show_document.html", {"doc": document})
 
