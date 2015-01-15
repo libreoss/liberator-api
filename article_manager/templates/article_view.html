@@ -17,6 +17,7 @@
 <li><a href="{% url "article_submit" article.pk "lat"%}">Edit Lat</a></li>
 <li><a href="{% url "article_submit" article.pk "cyr"%}">Edit cyr</a></li>
 <li><a href="{% url "article_delete" article.pk %}">Delete this article</a></li>
+<li><a href="{% url "article_approve" article.pk%}">Approve this article</a></li>
 </ul>
 
 </div>
@@ -51,6 +52,5 @@ document.getElementById("cyr-activator").className="active";
 <div class="article-content" id="article-content-cyr" hidden>
 {{article.contents_cyr|safe}}
 </div>
-
 
 {% endblock %}

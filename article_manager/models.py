@@ -7,6 +7,15 @@ from django.contrib.auth.models import User as Author
 from django.conf import settings 
 
 # Create your models here.
+class Category(models.Model): 
+    name = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self): 
+        return self.name
+
 class Article(models.Model):
     name = models.CharField(max_length=64)
     source_lat = models.CharField(max_length=48)
@@ -91,6 +100,3 @@ class Article(models.Model):
         """
         self.issue = issue
         self.category = cat
-
-def Category(models.Model): 
-    name = models.CharField(max_length=64)

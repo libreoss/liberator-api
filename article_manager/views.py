@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from article_manager.models import Article
+from article_manager.models import Article, Category
 from article_manager.forms import ArticleForm
 
 from article_manager.libre import LibreManager
@@ -99,3 +99,18 @@ def wiki_extend(request, wiki_slug, article_id, script):
     print(entry.contents_lat)
     print(entry.contents_cyr)
     return redirect("article_submit", entry.pk, script)
+
+@login_required 
+def article_approve(request, article_id): 
+    if request.method == "GET": 
+        context = {"article": Article.objects.get(pk = int(article_id)), 
+                   "categories": Category.objects.all()
+                  }
+        return render(request, "article_approve.html", context)
+    else: 
+        issue = request.POST["issue"]
+        cat = Category.objects.get(pk = request.POST["category"])
+        entry = Article.objects.get(pk = article_id) 
+        entry.approve(cat, issue)
+        entry.save()
+        return redirect("article_view", article_id)
