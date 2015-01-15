@@ -15,6 +15,8 @@ class Article(models.Model):
     contents_lat = models.TextField()
     author = models.ForeignKey(Author)
     stage = models.IntegerField(default = 0)
+    issue = models.IntegerField(blank = True, null = True)
+    category = models.ForeignKey(Category, blank = True, null=True)
 
     def __str__(self):
         return self.name
@@ -75,3 +77,6 @@ class Article(models.Model):
         False otherwise  
         """
         return Article.objects.filter(source_lat = slug).exists() or Article.objects.filter(source_cyr = slug).exists()
+
+def Category(models.Model): 
+    name = models.CharField(max_length=64)
