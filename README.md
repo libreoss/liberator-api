@@ -27,6 +27,7 @@ Dev guidlines:
 - Please, use python 3 and Django 1.7.
 - Make sure to use space instead of tab.
 - Private data and settings store in settings_dist.py file. There's a template.
+- User/Pass is admin/admin
 
 FAQ:
 ----
