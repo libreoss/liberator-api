@@ -1,5 +1,7 @@
-from selenium import webdriver
 import unittest
+
+from selenium import webdriver
+
 
 class ArticleImportWizardTest(unittest.TestCase):
     def setUp(self):
@@ -11,7 +13,8 @@ class ArticleImportWizardTest(unittest.TestCase):
 
     def test_can_get_list_of_articles_on_a_wiki_page(self):
         # Open the /manager URL
-        # There's the list articles which are linked to the the page "test_prikupljeni_clanci"
+        # There's the list articles which are linked to the the page
+        # "test_prikupljeni_clanci"
         # Every article has links to cyr and lat pages
         # Every article has the import button
         self.fail("Finish the test!")
