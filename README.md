@@ -21,6 +21,8 @@ Requirements:
 ------------
 - fantastic001/pydokuwiki
 - Django 1.7
+- Ansible 1.8
+- Vagrant 1.7
 
 Dev guidlines:
 -------------
