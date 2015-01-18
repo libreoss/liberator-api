@@ -1,0 +1,3 @@
+---
+liberator_python_packages:
+  - name: python3-pip

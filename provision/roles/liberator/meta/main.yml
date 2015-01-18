@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Goran Mekić
+  description: WEB application for magazine management
+  license: GPLv3
+  min_ansible_version: 1.6
+  platforms:
+    - name: Debian
+      versions:
+        - wheezy
+  categories:
+  - web
+dependencies:
+  - {role: postgresql}

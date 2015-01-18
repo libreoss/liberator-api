@@ -1,0 +1,19 @@
+---
+- name: install python packages
+  sudo: yes
+  with_items: liberator_python_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
+
+- name: install pip packages
+  sudo: yes
+  pip:
+    requirements: /vagrant/requirements.txt
+    executable: pip-3.2
+
+- name: migrate DB
+  sudo: yes
+  command: python3 manage.py migrate
+  args:
+    chdir: /vagrant

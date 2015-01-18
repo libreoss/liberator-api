@@ -63,3 +63,4 @@ liberator/settings_dist.py
 */migrations/
 
 .ropeproject/
+.vagrant/
