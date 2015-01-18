@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         liberator.vm.box = "debian"
         liberator.vm.box_url = "ftp://ftp.lugons.org/vagrant/debian-7.6.0-x86_64.box"
         liberator.vm.network :private_network, ip: "192.168.66.6"
-        liberator.vm.provision :ansible, run: "always" do |ansible|
+        liberator.vm.provision :ansible do |ansible|
             ansible.playbook = "provision/site.yml"
             ansible.host_key_checking = false
             ansible.groups = {

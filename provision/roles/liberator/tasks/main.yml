@@ -12,8 +12,14 @@
     requirements: /vagrant/requirements.txt
     executable: pip-3.2
 
+- name: configure liberator
+  template:
+    src: settings_dist.py.j2
+    dest: /vagrant/liberator/settings_dist.py
+    owner: vagrant
+    group: vagrant
+
 - name: migrate DB
-  sudo: yes
   command: python3 manage.py migrate
   args:
     chdir: /vagrant
