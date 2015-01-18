@@ -28,6 +28,15 @@
     dest: /var/www
     copy: no
 
+- name: link dokuwiki to actual directory
+  sudo: yes
+  file:
+    src: /var/www/dokuwiki-2014-09-29b
+    dest: /var/www/dokuwiki
+    owner: www-data
+    group: www-data
+    state: link
+
 - name: remove www php-fpm pool
   sudo: yes
   file:
