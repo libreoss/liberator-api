@@ -23,3 +23,9 @@
   command: python3 manage.py migrate
   args:
     chdir: /vagrant
+
+- name: load initial data
+  sudo: yes
+  command: python3 manage.py loaddata init
+  args:
+    chdir: /vagrant
