@@ -16,20 +16,19 @@ from django.contrib.auth.decorators import login_required
 def articles_list(request):
     stored_articles = Article.objects.all()
     remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
-    
+
     links = remote.getLocalLinks("wiki:prikupljeni_clanci") # get all available links from dokuwiki
-    
+
     to_import = [] # This is list for placing articles which have not been imported yet
     for link in links:
         imported = Article.slugInDatabase(link)
-        if not imported: imported = Article.slugInDatabase("wiki:" + link) # Try with namespace 
+        if not imported: imported = Article.slugInDatabase("wiki:" + link) # Try with namespace
         if not imported:
-            #w = Article.fromRemote(link)
-            #w.article_with_same_title = w.titleInDatabase()
             to_import.append(link)
-    context = { 'dokuwiki_articles' : to_import,
-                'stored_articles' : stored_articles,
-                }
+    context = {
+        'dokuwiki_articles' : to_import,
+        'stored_articles' : stored_articles,
+    }
     return render(request, 'articles_list.html', context)
 
 @login_required
@@ -47,7 +46,7 @@ def article_delete(request, article_id):
 @login_required
 def article_diff(request, article_id):
     article = Article.objects.get(pk= int(article_id))
-    diff = [] 
+    diff = []
     remote = LibreManager(settings.DOKUWIKI_USERNAME, settings.DOKUWIKI_PASSWORD)
     wiki_article = remote.getPage(article.source_lat)
     t1 = []
@@ -58,10 +57,10 @@ def article_diff(request, article_id):
     else:
         t1 = article.contents_lat.split("\n")
         t2 = wiki_article.getText().split("\n")
-    # We remove blank lines 
-    nt1 = [] 
-    nt2 = [] 
-    for line in t1: 
+    # We remove blank lines
+    nt1 = []
+    nt2 = []
+    for line in t1:
         if line.strip() != "":
             nt1.append(line.replace("\r", ""))
     for line in t2:
@@ -85,32 +84,31 @@ def wiki_extend(request, wiki_slug, article_id, script):
     entry = None
     if article_id == "auto":
         entry = wiki.titleInDatabase()
-    else: 
+    else:
         entry = Article.objects.get(pk = int(article_id))
     if not entry:
         return redirect("article_list") # TODO redirect to the error message
-    if script == "lat": 
-        entry.contents_lat = wiki.contents_lat 
-        entry.source_lat = wiki.source_lat 
-    else: 
+    if script == "lat":
+        entry.contents_lat = wiki.contents_lat
+        entry.source_lat = wiki.source_lat
+    else:
         entry.contents_cyr = wiki.contents_cyr
         entry.source_cyr = wiki.source_cyr
     entry.save()
-    print(entry.contents_lat)
-    print(entry.contents_cyr)
     return redirect("article_submit", entry.pk, script)
 
-@login_required 
-def article_approve(request, article_id): 
-    if request.method == "GET": 
-        context = {"article": Article.objects.get(pk = int(article_id)), 
-                   "categories": Category.objects.all()
-                  }
+@login_required
+def article_approve(request, article_id):
+    if request.method == "GET":
+        context = {
+            "article": Article.objects.get(pk = int(article_id)),
+            "categories": Category.objects.all()
+        }
         return render(request, "article_approve.html", context)
-    else: 
+    else:
         issue = request.POST["issue"]
         cat = Category.objects.get(pk = request.POST["category"])
-        entry = Article.objects.get(pk = article_id) 
+        entry = Article.objects.get(pk = article_id)
         entry.approve(cat, issue)
         entry.save()
         return redirect("article_view", article_id)
