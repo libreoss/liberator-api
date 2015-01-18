@@ -55,8 +55,8 @@
 },
 {
   "fields": {
-    "model": "article",
-    "name": "article",
+    "model": "category",
+    "name": "category",
     "app_label": "article_manager"
   },
   "model": "contenttypes.contenttype",
@@ -64,20 +64,12 @@
 },
 {
   "fields": {
-    "model": "category",
-    "name": "category",
+    "model": "article",
+    "name": "article",
     "app_label": "article_manager"
   },
   "model": "contenttypes.contenttype",
   "pk": 8
-},
-{
-  "fields": {
-    "expire_date": "2015-02-01T20:46:11.695Z",
-    "session_data": "MGViZGZjNjEwMTY1MTEwYzU0Mzk4NzUyMTFjMzVlNjdhZjM5MDE5MTp7Il9hdXRoX3VzZXJfaGFzaCI6IjZlZWJhNTI3NWU5NjRhZWU2NTljMzBmMWQwZGNhODBkNzY1ZGI2Y2QiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9"
-  },
-  "model": "sessions.session",
-  "pk": "l0kwmhx9wts5j63e0qaufmxkhxolw2ly"
 },
 {
   "fields": {
@@ -243,8 +235,8 @@
 },
 {
   "fields": {
-    "codename": "add_article",
-    "name": "Can add article",
+    "codename": "add_category",
+    "name": "Can add category",
     "content_type": 7
   },
   "model": "auth.permission",
@@ -252,8 +244,8 @@
 },
 {
   "fields": {
-    "codename": "change_article",
-    "name": "Can change article",
+    "codename": "change_category",
+    "name": "Can change category",
     "content_type": 7
   },
   "model": "auth.permission",
@@ -261,8 +253,8 @@
 },
 {
   "fields": {
-    "codename": "delete_article",
-    "name": "Can delete article",
+    "codename": "delete_category",
+    "name": "Can delete category",
     "content_type": 7
   },
   "model": "auth.permission",
@@ -270,8 +262,8 @@
 },
 {
   "fields": {
-    "codename": "add_category",
-    "name": "Can add category",
+    "codename": "add_article",
+    "name": "Can add article",
     "content_type": 8
   },
   "model": "auth.permission",
@@ -279,8 +271,8 @@
 },
 {
   "fields": {
-    "codename": "change_category",
-    "name": "Can change category",
+    "codename": "change_article",
+    "name": "Can change article",
     "content_type": 8
   },
   "model": "auth.permission",
@@ -288,8 +280,8 @@
 },
 {
   "fields": {
-    "codename": "delete_category",
-    "name": "Can delete category",
+    "codename": "delete_article",
+    "name": "Can delete article",
     "content_type": 8
   },
   "model": "auth.permission",
@@ -303,12 +295,12 @@
     "is_active": true,
     "is_superuser": true,
     "is_staff": true,
-    "last_login": "2015-01-18T20:46:11.691Z",
+    "last_login": "2015-01-18T21:28:32.566Z",
     "groups": [],
     "user_permissions": [],
-    "password": "pbkdf2_sha256$15000$wqtniXZdPzo8$hHB6EcmZftUFdSc/R7R0f7q0bKk552bR/npoL2N7bpM=",
+    "password": "pbkdf2_sha256$15000$CE4fenBgVW6c$oXC6Qm0E0qOfwbs8tudSRgdA5T5M0WzVu0fAgcZMCtc=",
     "email": "",
-    "date_joined": "2015-01-18T20:45:57.251Z"
+    "date_joined": "2015-01-18T21:28:32.566Z"
   },
   "model": "auth.user",
   "pk": 1
