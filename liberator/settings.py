@@ -102,5 +102,4 @@ TEMPLATE_DIRS = (
 #    'templates',
 #        )
 
-DOKUWIKI_URL = "https://libre.lugons.org/wiki/"
 from .settings_dist import *

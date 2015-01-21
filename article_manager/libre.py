@@ -7,6 +7,7 @@ from dokuwiki.parsers import Parser
 
 from article_manager.translit import cir_to_lat, check_cyr
 
+from liberator import settings
 
 class LibreTextParser(Parser):
     def onDocumentStart(self):
@@ -124,7 +125,7 @@ class LibreText(object):
 
 class LibreManager(object):
     def __init__(self, username, password):
-        self.remote = DokuWikiClient("http://192.168.6.7", username, password)
+        self.remote = DokuWikiClient(settings.DOKUWIKI_URL, username, password)
 
     def getPage(self, page):
         """
