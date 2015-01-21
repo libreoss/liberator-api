@@ -28,7 +28,7 @@ Dev guidlines:
 -------------
 - Please, use python 3 and Django 1.7.
 - Make sure to use space instead of tab.
-- Private data and settings store in settings_dist.py file. There's a template.
+- Upon `vagrant ssh` run `runserver.sh` and go to [Vagrant box](http://192.168.66.6:8000/manager/)
 - User/Pass is admin/admin
 
 FAQ:
