@@ -29,3 +29,8 @@
   command: python3 manage.py loaddata init
   args:
     chdir: /vagrant
+
+- name: put /vagrant/bin in path
+  template:
+    src: profile.j2
+    dest: ~/.profile
