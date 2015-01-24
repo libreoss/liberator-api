@@ -22,11 +22,19 @@
 
 - name: unpack dokuwiki
   sudo: yes
-  sudo_user: www-data
   unarchive:
     src: /tmp/dokuwiki.tar.gz
     dest: /var/www
     copy: no
+
+- name: change permissions on dokuwiki dir
+  sudo: yes
+  file:
+    path: /var/www/dokuwiki-2014-09-29b
+    recurse: yes
+    owner: www-data
+    group: www-data
+    state: directory
 
 - name: link dokuwiki to actual directory
   sudo: yes
