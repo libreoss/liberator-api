@@ -13,9 +13,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define "liberator" do |liberator|
         liberator.vm.box = "debian"
         if VAGRANT_ARCH == "x64"
-            liberator.vm.box_url = "ftp://ftp.lugons.org/vagrant/debian-7.6.0-x86_64.box"
+            liberator.vm.box_url = "https://ftp.lugons.org/vagrant/debian-7.6.0-x86_64.box"
         else
-            liberator.vm.box_url = "http://tools.swergroup.com/downloads/wheezy32.box"
             liberator.vm.box_url = "https://dl.dropboxusercontent.com/s/60pv9an852jx9y0/Debian-7.3.0-i386b.box?dl=1"
         end
 
