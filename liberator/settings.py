@@ -36,9 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'article_manager',
-    'article_editor',
-    'author_manager'
+    'liberator'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -102,4 +100,4 @@ TEMPLATE_DIRS = (
 #    'templates',
 #        )
 
-from .settings_dist import *
+#from .settings_dist import *
