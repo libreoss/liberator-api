@@ -3,6 +3,7 @@ from django.db import models
 from .section import Section
 from .issue import Issue
 from .language import Language
+from .serie import Serie
 from django.contrib.auth.models import User as Author
 
 class ArticleState(models.Model):
@@ -13,6 +14,8 @@ class Article(models.Model):
     author = models.ForeignKey(Author)
     state = models.ForeignKey(ArticleState)
     section = models.ForeignKey(Section, blank=True, null=True)
+    serie = models.ForeignKey(Serie, blank=True, null=True)
+    serie_part = models.IntegerField(blank=True, null=True)
     issue = models.ForeignKey(Issue, blank=True, null=True)
 
 class ArticleTitle(models.Model):
