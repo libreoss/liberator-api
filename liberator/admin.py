@@ -1,6 +1,17 @@
 from django.contrib import admin
 
-from liberator.models import Article, ArticleContent, ArticleState, ArticleTitle, Issue, IssueTitle, Language, Section, SectionTitle, Serie, SerieTitle
+from .models import \
+    Article, \
+    ArticleContent, \
+    ArticleState, \
+    ArticleTitle, \
+    Issue, \
+    IssueTitle, \
+    Language, \
+    Section, \
+    SectionTitle, \
+    Serie, \
+    SerieTitle
 
 admin.site.register(Article)
 admin.site.register(ArticleContent)

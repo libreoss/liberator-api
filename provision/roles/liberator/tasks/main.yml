@@ -1,7 +1,7 @@
 ---
-- name: install python packages
+- name: install packages
   sudo: yes
-  with_items: liberator_python_packages
+  with_items: liberator_packages
   apt:
     pkg: "{{ item.name }}"
     state: latest
@@ -12,12 +12,31 @@
     requirements: /vagrant/requirements.txt
     executable: pip-3.2
 
+- name: install python2 psycopg
+  sudo: yes
+  pip:
+    name: psycopg2
+
+- name: create liberator DB
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db:
+    name: liberator
+    encoding: 'UTF-8'
+    template: 'template0'
+
+- name: create liberator DB user
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user:
+    name: liberator
+    password: liberator
+    db: liberator
+
 - name: configure liberator
   template:
-    src: settings_dist.py.j2
-    dest: /vagrant/liberator/settings_dist.py
-    owner: vagrant
-    group: vagrant
+    src: init.py.j2
+    dest: /vagrant/project/settings/__init__.py
 
 - name: migrate DB
   command: python3 manage.py migrate

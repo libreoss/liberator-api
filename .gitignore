@@ -62,3 +62,4 @@ liberator/settings_dist.py
 .ropeproject/
 .vagrant/
 vagrant-conf.local
+project/settings/__init__.py

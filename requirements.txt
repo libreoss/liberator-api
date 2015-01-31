@@ -1,2 +1,5 @@
 django
+djangorestframework
+djangorestframework-jwt
 pydokuwiki
+psycopg2

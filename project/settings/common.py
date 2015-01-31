@@ -25,6 +25,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 
 # Application definition
@@ -36,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
     'liberator'
 )
 
@@ -51,7 +54,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'liberator.urls'
 
-WSGI_APPLICATION = 'liberator.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
@@ -59,8 +62,11 @@ WSGI_APPLICATION = 'liberator.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'liberator',
+        'USER': 'liberator',
+        'PASSWORD': 'liberator',
+        'HOST': '127.0.0.1',
     }
 }
 
@@ -79,7 +85,7 @@ USE_TZ = True
 
 
 # Login system
-LOGIN_URL = "author_login"
+LOGIN_URL = "/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -100,4 +106,21 @@ TEMPLATE_DIRS = (
 #    'templates',
 #        )
 
-#from .settings_dist import *
+# from .settings_dist import *
+
+AUTH_USER_MODEL = 'liberator.User'
+REST_FRAMEWORK = {
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
+
+DOKUWIKI_USERNAME = "admin"
+DOKUWIKI_PASSWORD = "admin"
+DOKUWIKI_URL = "http://192.168.66.6"
