@@ -12,10 +12,10 @@ Scenario: User opens /newarticle
   Given I load the page for new article submission
   Then I should see the info "Submit a new article"
   And I should see expected fields
-    | field          | not a field |
-    | something more |             |
-    | Article title  |             |
-    | Author         |             |
+    | field          |
+    | something more |
+    | Article title  |
+    | Author         |
 
   And I should see "Article script" selection with "Cyrillic" and "Latin"
   And I should see "Submit" button

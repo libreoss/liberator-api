@@ -29,13 +29,13 @@ def step_impl(context):
 
 @given('I load the page for new article submission')
 def step_impl(context):
+    print("Something!")
     pass
 
 @then('I should see the info "Submit a new article"')
 def step_impl(context):
     pass
 
-# FIXME: doesn't iterate as it should
 @then('I should see expected fields')
 def step_impl(context):
     for row in context.table:
