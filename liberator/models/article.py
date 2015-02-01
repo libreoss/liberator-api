@@ -1,10 +1,10 @@
-from django.db import models
 from django.conf import settings
-from .section import Section
-from .serie import Serie
+from django.db import models
+
 from .issue import Issue
 from .language import Language
-from .user import User
+from .section import Section
+from .serie import Serie
 
 
 class ArticleState(models.Model):
@@ -13,6 +13,7 @@ class ArticleState(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -37,7 +38,11 @@ class ArticleTitle(models.Model):
     revision_author = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def __str__(self):
-        return "{title} ({language})".format(language=self.language.name, title=self.title)
+        return "{title} ({language})".format(
+            language=self.language.name,
+            title=self.title
+        )
+
 
 class ArticleContent(models.Model):
     article = models.ForeignKey(Article)
@@ -48,7 +53,10 @@ class ArticleContent(models.Model):
     revision_author = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def __str__(self):
-        title = ArticleTitle.objects.filter(article=self.article, language=self.language).first()
+        title = ArticleTitle.objects.filter(
+            article=self.article,
+            language=self.language
+        ).first()
         if title is None:
             return "???"
         return title.title

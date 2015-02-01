@@ -10,10 +10,14 @@ class Section(models.Model):
             return "???"
         return " • ".join([title.__str__() for title in titles])
 
+
 class SectionTitle(models.Model):
     section = models.ForeignKey(Section)
     language = models.ForeignKey(Language)
     title = models.CharField(max_length=60)
 
     def __str__(self):
-        return "{title} ({language})".format(language=self.language.name, title=self.title)
+        return "{title} ({language})".format(
+            language=self.language.name,
+            title=self.title
+        )
