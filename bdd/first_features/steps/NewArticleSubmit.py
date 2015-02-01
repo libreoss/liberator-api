@@ -21,7 +21,8 @@ def step_impl(context):
 
 @given('{:some_word} homepage is at http://192.168.66.6:{port:d}')
 def step_impl(context, word, port):
-    pass
+    context.browser.get('http://192.168.66.6:8000')
+    assert "Liberator" in context.browser.title
 
 @given('no access privileges are implemented')
 def step_impl(context):
