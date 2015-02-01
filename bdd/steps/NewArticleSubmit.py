@@ -1,11 +1,26 @@
-from behave import *
+from behave import given, when, then, register_type
+import parse
+
+# FIXME regex patterns aren't working as expected
+# \w+ matches only one word, and \w doesn't match one word
+
+@parse.with_pattern(r"\w+")
+def parse_word(text):
+    return str(text)
+
+@parse.with_pattern(r'\w+')
+def parse_string(text):
+    return str(text)
+
+register_type(some_word   = parse_word)
+register_type(some_string = parse_string)
 
 @given('that Liberator is running')
 def step_impl(context):
     pass
 
-@given('the homepage is at http://localhost:8000')
-def step_impl(context):
+@given('{:some_word} homepage is at http://192.168.66.6:{port:d}')
+def step_impl(context, word, port):
     pass
 
 @given('no access privileges are implemented')
@@ -20,25 +35,11 @@ def step_impl(context):
 def step_impl(context):
     pass
 
-@then('I should see current time and date')
+# FIXME: doesn't iterate as it should
+@then('I should see expected fields')
 def step_impl(context):
-    pass
-
-@then('I should see "Article title" field')
-def step_impl(context):
-    pass
-
-@then('I should see "Article subtitle" field')
-def step_impl(context):
-    pass
-
-@then('I should see "Article author ID" field')
-def step_impl(context):
-    pass
-
-@then('I should see "Article body" field')
-def step_impl(context):
-    pass
+    for row in context.table:
+        pass
 
 @then('I should see "Article script" selection with "Cyrillic" and "Latin"')
 def step_impl(context):
