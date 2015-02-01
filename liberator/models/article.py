@@ -1,5 +1,5 @@
-from django.conf import settings
 from django.db import models
+from django.conf import settings
 
 from .issue import Issue
 from .language import Language
@@ -28,6 +28,7 @@ class Article(models.Model):
         if len(titles) == 0:
             return "???"
         return " • ".join([title.__str__() for title in titles])
+
 
 class ArticleTitle(models.Model):
     article = models.ForeignKey(Article)

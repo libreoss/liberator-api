@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.contrib import admin
 
 from .models import \
@@ -13,6 +14,7 @@ from .models import \
     Serie, \
     SerieTitle
 
+
 admin.site.register(Article)
 admin.site.register(ArticleContent)
 admin.site.register(ArticleState)
@@ -24,3 +26,4 @@ admin.site.register(Section)
 admin.site.register(SectionTitle)
 admin.site.register(Serie)
 admin.site.register(SerieTitle)
+admin.site.register(get_user_model())

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from . import models
+from liberator import models
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,8 +17,3 @@ class UserSerializer(serializers.ModelSerializer):
             'groups',
             'user_permissions',
         )
-
-
-class ArticleStateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.ArticleState

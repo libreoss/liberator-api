@@ -1,4 +1,6 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, \
+from django.contrib.auth.models import \
+    AbstractBaseUser, \
+    PermissionsMixin, \
     BaseUserManager
 from django.core.mail import send_mail
 from django.db import models
@@ -73,7 +75,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         )
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    ssh_key = models.TextField(_('private SSH key'), blank=True, null=True)
 
     objects = UserManager()
 
