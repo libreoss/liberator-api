@@ -32,7 +32,7 @@ Dev guidlines:
 - Please, use python 3 and Django 1.7.
 - Make sure to use space instead of tab.
 - Upon `vagrant up` and `vagrant ssh` run `/vagrant/manage.py runserver 0.0.0.0:8000` and go to [Vagrant box](http://192.168.66.6:8000/)
-- User/Pass is admin/admin
+- User/Pass is admin@example.com/Sekrit
 
 FAQ:
 ----
