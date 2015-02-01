@@ -12,10 +12,14 @@ class Issue(models.Model):
             return "???"
         return " • ".join([title.__str__() for title in titles])
 
+
 class IssueTitle(models.Model):
     issue = models.ForeignKey(Issue)
     language = models.ForeignKey(Language)
     title = models.CharField(max_length=60)
 
     def __str__(self):
-        return "{title} ({language})".format(language=self.language.name, title=self.title)
+        return "{title} ({language})".format(
+            language=self.language.name,
+            title=self.title
+        )
