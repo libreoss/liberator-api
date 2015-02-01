@@ -50,3 +50,5 @@ FAQ:
   - Yup, liberator provides only REST API for other clients. We are working on web client (angular, inuit...) Checkout other libreoss repositories. Maybe once there will be native Android, GTK, Qt or some other client, too.
 - There were other Django apps in this project. Code is still here, but you are not using them.
   - Yup, we are moving to a web app which is based on Angular and it's separate project. Old code is still here, but it's disabled and probably will never be enabled again. It will be removed soon.
+- My machine has no support for running 64bit guest systems, can i use 32bit version as vagrant machine? 
+  - Yes, just create file vagrant-conf.local and put `VAGRANT_ARCH = "x32"` in there. Then you need to execute `vagrant up`. If you're using 64bit machine, you have to remove old machine and run `vagrant destroy -f` and then `vagrant up` again.
