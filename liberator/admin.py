@@ -1,18 +1,19 @@
 from django.contrib.auth import get_user_model
 from django.contrib import admin
 
-from .models import \
-    Article, \
-    ArticleContent, \
-    ArticleState, \
-    ArticleTitle, \
-    Issue, \
-    IssueTitle, \
-    Language, \
-    Section, \
-    SectionTitle, \
-    Serie, \
+from .models import (
+    Article,
+    ArticleContent,
+    ArticleState,
+    ArticleTitle,
+    Issue,
+    IssueTitle,
+    Language,
+    Section,
+    SectionTitle,
+    Serie,
     SerieTitle
+)
 
 
 admin.site.register(Article)
