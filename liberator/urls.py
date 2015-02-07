@@ -1,23 +1,57 @@
 from django.conf.urls import patterns, url, include
 from django.contrib import admin
-from rest_framework.routers import DefaultRouter
+from rest_framework_extensions.routers import ExtendedDefaultRouter
 
 from . import views
 
 
-router_v1 = DefaultRouter()
-router_v1.register(r'articles', views.ArticleViewSet)
-router_v1.register(r'article-states', views.ArticleStateViewSet)
-router_v1.register(r'article-titles', views.ArticleTitleViewSet)
-router_v1.register(r'article-content', views.ArticleContentViewSet)
-router_v1.register(r'issues', views.IssueViewSet)
-router_v1.register(r'issue-titles', views.IssueTitleViewSet)
-router_v1.register(r'languages', views.LanguageViewSet)
-router_v1.register(r'sections', views.SectionViewSet)
-router_v1.register(r'section-titles', views.SectionTitleViewSet)
-router_v1.register(r'series', views.SerieViewSet)
-router_v1.register(r'serie-titles', views.SerieTitleViewSet)
-router_v1.register(r'users', views.UserViewSet)
+router = ExtendedDefaultRouter()
+router.register(r'languages', views.LanguageViewSet)
+
+article = router.register(r'articles', views.ArticleViewSet)
+
+article.register(
+    r'states',
+    views.ArticleStateViewSet,
+    base_name='articles-state',
+    parents_query_lookups=['state']
+)
+article.register(
+    r'titles',
+    views.ArticleTitleViewSet,
+    base_name='articles-title',
+    parents_query_lookups=['article']
+)
+article.register(
+    r'contents',
+    views.ArticleContentViewSet,
+    base_name='articles-content',
+    parents_query_lookups=['article']
+)
+
+router.register(r'issues', views.IssueViewSet).register(
+    r'titles',
+    views.IssueTitleViewSet,
+    base_name='issues-title',
+    parents_query_lookups=['issue']
+)
+
+router.register(r'sections', views.SectionViewSet).register(
+    r'titles',
+    views.SectionTitleViewSet,
+    base_name='selections-title',
+    parents_query_lookups=['section']
+)
+
+router.register(r'series', views.SerieViewSet).register(
+    r'titles',
+    views.SerieTitleViewSet,
+    base_name='series-title',
+    parents_query_lookups=['serie']
+)
+
+router.register(r'users', views.UserViewSet)
+
 
 urlpatterns = patterns(
     '',
@@ -25,7 +59,7 @@ urlpatterns = patterns(
     url(
         r'^v1/',
         include(
-            router_v1.urls,
+            router.urls,
         ),
     ),
     url(
