@@ -7,15 +7,10 @@ from . import views
 
 router = ExtendedDefaultRouter()
 router.register(r'languages', views.LanguageViewSet)
+router.register(r'article-states', views.ArticleStateViewSet)
+router.register(r'users', views.UserViewSet)
 
 article = router.register(r'articles', views.ArticleViewSet)
-
-article.register(
-    r'states',
-    views.ArticleStateViewSet,
-    base_name='articles-state',
-    parents_query_lookups=['article']
-)
 article.register(
     r'titles',
     views.ArticleTitleViewSet,
@@ -49,8 +44,6 @@ router.register(r'series', views.SerieViewSet).register(
     base_name='series-title',
     parents_query_lookups=['serie']
 )
-
-router.register(r'users', views.UserViewSet)
 
 
 urlpatterns = patterns(
