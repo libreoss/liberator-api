@@ -32,6 +32,7 @@
     name: liberator
     password: liberator
     db: liberator
+    role_attr_flags: "CREATEDB"
 
 - name: configure liberator
   template:
