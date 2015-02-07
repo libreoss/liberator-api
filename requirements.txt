@@ -1,5 +1,5 @@
 django
 djangorestframework
 djangorestframework-jwt
-drf-extensions
+git+https://github.com/mekanix/drf-extensions
 psycopg2
