@@ -5,12 +5,6 @@ from rest_framework.decorators import list_route
 from liberator import serializers
 
 
-class MeViewSet(viewsets.GenericViewSet):
-    def detail(self, request):
-        serializer = serializers.UserSerializer(request.user)
-        return Response(serializer.data)
-
-
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.UserSerializer
     queryset = serializer_class.Meta.model.objects.all()
@@ -24,6 +18,5 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['get'])
     def me(self, request):
-        return MeViewSet.as_view({
-            'get': 'detail'
-        })(request)
+        serializer = serializers.UserSerializer(request.user)
+        return Response(serializer.data)
