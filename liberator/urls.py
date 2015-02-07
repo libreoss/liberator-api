@@ -14,7 +14,7 @@ article.register(
     r'states',
     views.ArticleStateViewSet,
     base_name='articles-state',
-    parents_query_lookups=['state']
+    parents_query_lookups=['article']
 )
 article.register(
     r'titles',
