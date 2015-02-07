@@ -34,7 +34,7 @@ router.register(r'issues', views.IssueViewSet).register(
 router.register(r'sections', views.SectionViewSet).register(
     r'titles',
     views.SectionTitleViewSet,
-    base_name='selections-title',
+    base_name='sections-title',
     parents_query_lookups=['section']
 )
 
