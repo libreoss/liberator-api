@@ -1,0 +1,3 @@
+
+class TestLanguage(object):
+    pass
