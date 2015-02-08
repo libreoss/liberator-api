@@ -3,3 +3,4 @@ djangorestframework
 djangorestframework-jwt
 pydokuwiki
 psycopg2
+nose
