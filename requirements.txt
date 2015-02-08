@@ -4,3 +4,4 @@ djangorestframework-jwt
 pydokuwiki
 psycopg2
 nose
+django-nose
