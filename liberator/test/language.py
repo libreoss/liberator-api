@@ -1,3 +1,0 @@
-
-class TestLanguage(object):
-    pass

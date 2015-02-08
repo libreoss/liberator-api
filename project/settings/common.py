@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'liberator'
+    'liberator',
+    'django_nose',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,3 +105,5 @@ REST_FRAMEWORK = {
 DOKUWIKI_USERNAME = "admin"
 DOKUWIKI_PASSWORD = "admin"
 DOKUWIKI_URL = "http://192.168.66.6"
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
