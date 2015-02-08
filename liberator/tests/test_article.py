@@ -1,13 +1,12 @@
 from django.test import TestCase
 
 class TestArticle(TestCase):
-    def test_article_1(self):
-        pass
-    def test_article_2(self):
+    def article_test_1(self):
         pass
 
 class TestArticleTitle(TestCase):
-    pass
+    def test_article_title(self):
+        pass
 
 class TestArticleContent(TestCase):
     pass
