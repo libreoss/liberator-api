@@ -107,3 +107,5 @@ DOKUWIKI_PASSWORD = "admin"
 DOKUWIKI_URL = "http://192.168.66.6"
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [ 'liberator', ]
