@@ -11,3 +11,7 @@ class SerieSerializer(serializers.ModelSerializer):
 class SerieTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SerieTitle
+        fields = (
+            'title',
+            'language',
+        )

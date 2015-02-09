@@ -11,3 +11,7 @@ class SectionSerializer(serializers.ModelSerializer):
 class SectionTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SectionTitle
+        fields = (
+            'title',
+            'language',
+        )

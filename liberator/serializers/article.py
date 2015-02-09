@@ -16,8 +16,21 @@ class ArticleSerializer(serializers.ModelSerializer):
 class ArticleTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ArticleTitle
+        fields = (
+            'title',
+            'language',
+            'revision',
+            'revision_author',
+        )
+
 
 
 class ArticleContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ArticleContent
+        fields = (
+            'content',
+            'language',
+            'revision',
+            'revision_author',
+        )
