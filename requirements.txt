@@ -1,0 +1,7 @@
+django
+djangorestframework
+djangorestframework-jwt
+git+https://github.com/mekanix/drf-extensions
+psycopg2
+nose
+django-nose

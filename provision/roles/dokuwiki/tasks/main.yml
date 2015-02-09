@@ -1,0 +1,102 @@
+---
+- name: install packages
+  sudo: yes
+  with_items: dokuwiki_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
+
+- name: download dokuwiki
+  get_url:
+    url: "{{ dokuwiki_url }}"
+    dest: /tmp/dokuwiki.tar.gz
+    sha256sum: "{{ dokuwiki_sha256 }}"
+
+- name: create /var/www
+  sudo: yes
+  file:
+    path: /var/www
+    owner: www-data
+    group: www-data
+    state: directory
+
+- name: unpack dokuwiki
+  sudo: yes
+  unarchive:
+    src: /tmp/dokuwiki.tar.gz
+    dest: /var/www
+    copy: no
+
+- name: change permissions on dokuwiki dir
+  sudo: yes
+  file:
+    path: /var/www/dokuwiki-2014-09-29b
+    recurse: yes
+    owner: www-data
+    group: www-data
+    state: directory
+
+- name: link dokuwiki to actual directory
+  sudo: yes
+  file:
+    src: /var/www/dokuwiki-2014-09-29b
+    dest: /var/www/dokuwiki
+    owner: www-data
+    group: www-data
+    state: link
+
+- name: remove www php-fpm pool
+  sudo: yes
+  file:
+    path: /etc/php5/fpm/pool.d/www.conf
+    state: absent
+  notify:
+    - restart php5-fpm
+
+- name: configure dokuwiki php-fpm pool
+  sudo: yes
+  template:
+    src: php-dokuwiki.conf.j2
+    dest: /etc/php5/fpm/pool.d/dokuwiki.conf
+    owner: root
+    group: root
+  notify:
+    - restart php5-fpm
+
+- name: configure dokuwiki
+  sudo: yes
+  with_items: dokuwiki_config_files
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "/var/www/dokuwiki/conf/{{ item.name }}"
+    owner: www-data
+    group: www-data
+
+- name: configure nginx
+  sudo: yes
+  template:
+    src: nginx-dokuwiki.conf.j2
+    dest: /etc/nginx/sites-available/dokuwiki.conf
+    owner: root
+    group: root
+  notify:
+    - restart nginx
+
+- name: enable nginx config
+  sudo: yes
+  file:
+    src: /etc/nginx/sites-available/dokuwiki.conf
+    path: /etc/nginx/sites-enabled/dokuwiki.conf
+    owner: root
+    group: root
+    state: link
+  notify:
+    - restart nginx
+
+- name: disable default nginx config
+  sudo: yes
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify:
+    - restart nginx

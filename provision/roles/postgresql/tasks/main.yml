@@ -1,0 +1,15 @@
+---
+- name: install postgresql packages
+  sudo: yes
+  with_items: postgresql_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
+
+- name: start postgresql
+  sudo: yes
+  service:
+    name: postgresql
+    enabled: yes
+    state: started
+

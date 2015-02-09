@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Goran Mekić
+  description: PostgreSQL
+  license: GPLv3
+  min_ansible_version: 1.6
+  platforms:
+    - name: Debian
+      versions:
+        - wheezy
+  categories:
+  - databasde
+dependencies:
+  - {role: common}
+

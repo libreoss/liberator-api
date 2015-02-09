@@ -1,0 +1,7 @@
+---
+- name: install common packages
+  sudo: yes
+  with_items: common_packages
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest

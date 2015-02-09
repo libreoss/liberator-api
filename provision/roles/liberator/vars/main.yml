@@ -1,0 +1,5 @@
+---
+liberator_packages:
+  - name: python3-pip
+  - name: python-pip
+  - name: python-all-dev
