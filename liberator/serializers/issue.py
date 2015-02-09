@@ -11,3 +11,7 @@ class IssueSerializer(serializers.ModelSerializer):
 class IssueTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.IssueTitle
+        fields = (
+            'title',
+            'language',
+        )
