@@ -30,7 +30,7 @@
 - name: change permissions on dokuwiki dir
   sudo: yes
   file:
-    path: /var/www/dokuwiki-2014-09-29b
+    path: "/var/www/{{ dokuwiki_dirname }}"
     recurse: yes
     owner: www-data
     group: www-data
@@ -39,7 +39,7 @@
 - name: link dokuwiki to actual directory
   sudo: yes
   file:
-    src: /var/www/dokuwiki-2014-09-29b
+    src: "/var/www/{{ dokuwiki_dirname }}"
     dest: /var/www/dokuwiki
     owner: www-data
     group: www-data

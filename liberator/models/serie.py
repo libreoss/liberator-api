@@ -12,7 +12,7 @@ class Serie(models.Model):
 
 
 class SerieTitle(models.Model):
-    serie = models.ForeignKey(Serie)
+    serie = models.ForeignKey(Serie, related_name='titles')
     language = models.ForeignKey(Language)
     title = models.CharField(max_length=60)
 

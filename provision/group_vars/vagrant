@@ -1,3 +1,4 @@
 ---
-dokuwiki_url: http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
-dokuwiki_sha256: 7f7c705997278cb6769a91a1a7c38053a3edb0663e7ac8285f613c9d849a5487
+dokuwiki_dirname: dokuwiki-2014-09-29c
+dokuwiki_url: "http://download.dokuwiki.org/src/dokuwiki/{{ dokuwiki_dirname }}.tgz"
+dokuwiki_sha256: 5ff1f8699d7aa8f455f8211f10656505037bee19293f90c5ed79a963d5623f09

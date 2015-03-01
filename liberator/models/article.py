@@ -31,12 +31,16 @@ class Article(models.Model):
 
 
 class ArticleTitle(models.Model):
-    article = models.ForeignKey(Article)
+    article = models.ForeignKey(Article, related_name='titles')
     language = models.ForeignKey(Language)
     title = models.CharField(max_length=180)
-    revision = models.IntegerField(blank=True)
+    revision = models.IntegerField(blank=True, null=True)
     revision_timestamp = models.DateTimeField(auto_now=True, auto_now_add=True)
-    revision_author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    revision_author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return "{title} ({language})".format(
@@ -46,12 +50,16 @@ class ArticleTitle(models.Model):
 
 
 class ArticleContent(models.Model):
-    article = models.ForeignKey(Article)
+    article = models.ForeignKey(Article, related_name='contents')
     language = models.ForeignKey(Language)
     content = models.TextField()
-    revision = models.IntegerField(blank=True)
+    revision = models.IntegerField(blank=True, null=True)
     revision_timestamp = models.DateTimeField(auto_now=True, auto_now_add=True)
-    revision_author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    revision_author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         title = ArticleTitle.objects.filter(
