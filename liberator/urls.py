@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, url, include
-from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 
 from . import views
@@ -16,7 +15,6 @@ router.register(r'series', views.SerieViewSet)
 
 urlpatterns = patterns(
     '',
-    url(r'^admin/', include(admin.site.urls)),
     url(
         r'^v1/',
         include(
