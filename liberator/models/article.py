@@ -16,7 +16,7 @@ class ArticleState(models.Model):
 
 
 class Article(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    authors = models.ManyToManyField(settings.AUTH_USER_MODEL)
     state = models.ForeignKey(ArticleState)
     section = models.ForeignKey(Section, blank=True, null=True)
     serie = models.ForeignKey(Serie, blank=True, null=True)
