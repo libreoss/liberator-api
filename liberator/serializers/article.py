@@ -33,6 +33,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = models.Article
         fields = (
             'id',
+            'authors',
             'state',
             'section',
             'serie',
@@ -45,10 +46,12 @@ class ArticleSerializer(serializers.ModelSerializer):
     def create(self, data):
         state = data['state']
         article = models.Article.objects.create(
-            author=self.context['request'].user,
             state=state,
         )
         article.save()
+
+        for author in data['authors']:
+            article.authors.add(author)
 
         for title_instance in data['titles']:
             title_data = {
