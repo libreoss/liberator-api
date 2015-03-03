@@ -14,7 +14,7 @@ class Issue(models.Model):
 
 
 class IssueTitle(models.Model):
-    issue = models.ForeignKey(Issue)
+    issue = models.ForeignKey(Issue, related_name='titles')
     language = models.ForeignKey(Language)
     title = models.CharField(max_length=60)
 

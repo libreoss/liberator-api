@@ -12,7 +12,7 @@ class Section(models.Model):
 
 
 class SectionTitle(models.Model):
-    section = models.ForeignKey(Section)
+    section = models.ForeignKey(Section, related_name='titles')
     language = models.ForeignKey(Language)
     title = models.CharField(max_length=60)
 
