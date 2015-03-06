@@ -1,4 +1,0 @@
----
-postgresql_packages:
-  - name: postgresql
-  - name: postgresql-server-dev-9.1

@@ -1,4 +1,0 @@
----
-dokuwiki_dirname: dokuwiki-2014-09-29c
-dokuwiki_url: "http://download.dokuwiki.org/src/dokuwiki/{{ dokuwiki_dirname }}.tgz"
-dokuwiki_sha256: 5ff1f8699d7aa8f455f8211f10656505037bee19293f90c5ed79a963d5623f09
