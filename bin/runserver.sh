@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/vagrant/manage.py runserver 0.0.0.0:8000
+/vagrant/projects/api/manage.py runserver 0.0.0.0:8000
