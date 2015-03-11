@@ -1,4 +1,5 @@
 django
+django-cors-headers
 djangorestframework
 djangorestframework-jwt
 git+https://github.com/mekanix/drf-extensions

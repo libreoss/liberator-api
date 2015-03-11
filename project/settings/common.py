@@ -27,6 +27,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 X_FRAME_OPTIONS = 'ALLOWALL'
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
