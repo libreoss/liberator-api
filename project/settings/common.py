@@ -43,7 +43,6 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'liberator',
-    'django_nose',
 )
 
 MIDDLEWARE_CLASSES = (
