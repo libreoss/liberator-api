@@ -2,7 +2,5 @@ django
 django-cors-headers
 djangorestframework
 git+https://github/fantastic001/djangorestframework-jwt
-git+https://github.com/mekanix/drf-extensions
+djangorestframework-jwt
 psycopg2
-nose
-django-nose

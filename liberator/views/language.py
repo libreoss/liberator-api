@@ -5,5 +5,16 @@ from liberator import serializers
 
 
 class LanguageViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    """
+    Language endpoint view
+    """
+
     serializer_class = serializers.LanguageSerializer
+    """
+    Serializer class
+    """
+
     queryset = serializer_class.Meta.model.objects.all()
+    """
+    Queryset
+    """

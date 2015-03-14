@@ -4,6 +4,9 @@ from liberator import models
 
 
 class IssueTitleSerializer(serializers.ModelSerializer):
+    """
+    Issue title serializer
+    """
     class Meta:
         model = models.IssueTitle
         fields = (
@@ -13,6 +16,9 @@ class IssueTitleSerializer(serializers.ModelSerializer):
 
 
 class IssueSerializer(serializers.ModelSerializer):
+    """
+    Issue serializer
+    """
     titles = IssueTitleSerializer(many=True)
 
     class Meta:
@@ -24,6 +30,9 @@ class IssueSerializer(serializers.ModelSerializer):
         )
 
     def create(self, data):
+        """
+        Create issue and it's title in one request
+        """
         publication_date = data['publication_date']
 
         issue = models.Issue.objects.create(publication_date=publication_date)

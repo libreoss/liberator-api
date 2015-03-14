@@ -37,9 +37,15 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **extra_fields):
+        """
+        Create user
+        """
         return self._create_user(email, password, False, False, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
+        """
+        Create superuser
+        """
         return self._create_user(email, password, True, True, **extra_fields)
 
 
@@ -57,8 +63,20 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=False,
         unique=True
     )
+    """
+    Email of the user
+    """
+
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    """
+    First name of the user
+    """
+
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    """
+    Last name of the user
+    """
+
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -67,6 +85,10 @@ class User(AbstractBaseUser, PermissionsMixin):
             'site.'
         )
     )
+    """
+    Is the user the staff
+    """
+
     is_active = models.BooleanField(
         _('active'),
         default=True,
@@ -75,7 +97,14 @@ class User(AbstractBaseUser, PermissionsMixin):
             'active. Unselect this instead of deleting accounts.'
         )
     )
+    """
+    Is the user active
+    """
+
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    """
+    When did the user join
+    """
 
     objects = UserManager()
 
@@ -87,6 +116,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
 
     def get_absolute_url(self):
+        """
+        Absolute URL of user
+        """
         return "/users/%s/" % urlquote(self.email)
 
     def get_full_name(self):
@@ -97,11 +129,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         return full_name.strip()
 
     def get_short_name(self):
-        "Returns the short name for the user."
+        """
+        Returns the short name for the user.
+        """
         return self.first_name
 
     def email_user(self, subject, message, from_email=None):
         """
-        Sends an email to this User.
+        Sends an email to the User.
         """
         send_mail(subject, message, from_email, [self.email])

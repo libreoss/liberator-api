@@ -4,6 +4,9 @@ from liberator import models
 
 
 class SerieTitleSerializer(serializers.ModelSerializer):
+    """
+    Serie title serializer
+    """
     class Meta:
         model = models.SerieTitle
         fields = (
@@ -13,7 +16,14 @@ class SerieTitleSerializer(serializers.ModelSerializer):
 
 
 class SerieSerializer(serializers.ModelSerializer):
+    """
+    Serie serrializer
+    """
+
     titles = SerieTitleSerializer(many=True)
+    """
+    Titles of the serie in different languages
+    """
 
     class Meta:
         model = models.Serie
@@ -23,6 +33,9 @@ class SerieSerializer(serializers.ModelSerializer):
         )
 
     def create(self, data):
+        """
+        Create serie and it title in one request
+        """
         serie = models.Serie.objects.create()
         serie.save()
 
