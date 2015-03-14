@@ -63,3 +63,4 @@ liberator/settings_dist.py
 .vagrant/
 vagrant-conf.local
 project/settings/__init__.py
+_build

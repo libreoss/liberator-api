@@ -4,6 +4,9 @@ from liberator import models
 
 
 class SectionTitleSerializer(serializers.ModelSerializer):
+    """
+    Section title serializer
+    """
     class Meta:
         model = models.SectionTitle
         fields = (
@@ -13,7 +16,14 @@ class SectionTitleSerializer(serializers.ModelSerializer):
 
 
 class SectionSerializer(serializers.ModelSerializer):
+    """
+    Section serializer
+    """
+
     titles = SectionTitleSerializer(many=True)
+    """
+    Titles of the section in different languages
+    """
 
     class Meta:
         model = models.Section
@@ -23,6 +33,9 @@ class SectionSerializer(serializers.ModelSerializer):
         )
 
     def create(self, data):
+        """
+        Create section and its title in one request
+        """
         section = models.Section.objects.create()
         section.save()
 

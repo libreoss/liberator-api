@@ -7,8 +7,19 @@ from liberator import serializers
 
 
 class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    """
+    User endpoint view
+    """
+
     serializer_class = serializers.UserSerializer
+    """
+    Serializer class
+    """
+
     queryset = serializer_class.Meta.model.objects.all()
+    """
+    Queryset
+    """
 
     def pre_save(self, obj):
         """
@@ -19,5 +30,8 @@ class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 
     @list_route(methods=['get'])
     def me(self, request):
+        """
+        Return info about logged in user
+        """
         serializer = serializers.UserSerializer(request.user)
         return Response(serializer.data)

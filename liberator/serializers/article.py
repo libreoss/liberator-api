@@ -4,6 +4,9 @@ from liberator import models
 
 
 class ArticleTitleSerializer(serializers.ModelSerializer):
+    """
+    ArticleTitleSerializer
+    """
     class Meta:
         model = models.ArticleTitle
         fields = (
@@ -15,6 +18,9 @@ class ArticleTitleSerializer(serializers.ModelSerializer):
 
 
 class ArticleContentSerializer(serializers.ModelSerializer):
+    """
+    ArticleContentSerializer
+    """
     class Meta:
         model = models.ArticleContent
         fields = (
@@ -26,8 +32,19 @@ class ArticleContentSerializer(serializers.ModelSerializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    """
+    ArticleSerializer
+    """
+
     titles = ArticleTitleSerializer(many=True)
+    """
+    Titles of the article in different languages
+    """
+
     contents = ArticleContentSerializer(many=True)
+    """
+    Contents of the article in different languages
+    """
 
     class Meta:
         model = models.Article
@@ -44,6 +61,10 @@ class ArticleSerializer(serializers.ModelSerializer):
         )
 
     def create(self, data):
+        """
+        Create the article, title and content in one request
+        """
+
         state = data['state']
         article = models.Article.objects.create(
             state=state,
@@ -83,5 +104,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class ArticleStateSerializer(serializers.ModelSerializer):
+    """
+    Article state serializer
+    """
     class Meta:
         model = models.ArticleState

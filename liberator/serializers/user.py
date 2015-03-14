@@ -4,6 +4,9 @@ from liberator import models
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    User serializer
+    """
     class Meta:
         model = models.User
         write_only_fields = ('password',)
