@@ -27,7 +27,7 @@ class Article(models.Model):
     Article class which points to list of authors, titles and contents
     """
 
-    authors = models.ManyToManyField(settings.AUTH_USER_MODEL, help_text='Authors of this article')
+    authors = models.ManyToManyField(settings.AUTH_USER_MODEL)
     """
     Authors of the article
     """
@@ -153,7 +153,6 @@ class ArticleContent(models.Model):
     """
     Author of the revision
     """
-
 
     def __str__(self):
         title = ArticleTitle.objects.filter(
