@@ -10,6 +10,7 @@ class ArticleTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ArticleTitle
         fields = (
+            'article',
             'title',
             'language',
             'revision',
