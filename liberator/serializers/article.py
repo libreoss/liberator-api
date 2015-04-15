@@ -54,8 +54,6 @@ class ArticleSerializer(serializers.ModelSerializer):
     Contents of the article in different languages
     """
 
-    state = ArticleStateSerializer(required=False)
-
     class Meta:
         model = models.Article
         fields = (
