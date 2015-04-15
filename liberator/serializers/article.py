@@ -95,7 +95,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             title = models.ArticleTitle.objects.create(**title_data)
             title.save()
 
-        for content_instance in data['contents']:
+        for content_instance in data.get('contents', []):
             content_data = {
                 'article_id': article.pk,
                 'language_id': content_instance['language'].pk,
