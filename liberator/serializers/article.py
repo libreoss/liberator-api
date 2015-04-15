@@ -31,6 +31,14 @@ class ArticleContentSerializer(serializers.ModelSerializer):
         )
 
 
+class ArticleStateSerializer(serializers.ModelSerializer):
+    """
+    Article state serializer
+    """
+    class Meta:
+        model = models.ArticleState
+
+
 class ArticleSerializer(serializers.ModelSerializer):
     """
     ArticleSerializer
@@ -41,10 +49,12 @@ class ArticleSerializer(serializers.ModelSerializer):
     Titles of the article in different languages
     """
 
-    contents = ArticleContentSerializer(many=True)
+    contents = ArticleContentSerializer(many=True, required=False)
     """
     Contents of the article in different languages
     """
+
+    state = ArticleStateSerializer(required=False)
 
     class Meta:
         model = models.Article
@@ -101,11 +111,3 @@ class ArticleSerializer(serializers.ModelSerializer):
             content.save()
 
         return article
-
-
-class ArticleStateSerializer(serializers.ModelSerializer):
-    """
-    Article state serializer
-    """
-    class Meta:
-        model = models.ArticleState
