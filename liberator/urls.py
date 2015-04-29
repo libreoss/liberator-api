@@ -12,6 +12,7 @@ router.register(r'articles', views.ArticleViewSet)
 router.register(r'issues', views.IssueViewSet)
 router.register(r'sections', views.SectionViewSet)
 router.register(r'series', views.SerieViewSet)
+router.register(r'titles', views.ArticleTitleViewSet)
 
 urlpatterns = patterns(
     '',

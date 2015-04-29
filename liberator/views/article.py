@@ -53,7 +53,7 @@ class ArticleTitleViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     """
 
     def perform_create(self, serializer):
-        parents_query_dict = self.get_parents_query_dict()
+        parents_query_dict = self.request.data
         article_id = parents_query_dict['article']
         article = models.Article.objects.get(pk=article_id)
         serializer.save(article=article)
