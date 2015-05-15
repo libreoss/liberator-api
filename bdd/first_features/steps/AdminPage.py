@@ -1,8 +1,8 @@
 from behave import *
 
-@given(u'the homepage is at http://localhost:8000')
+@given(u'the homepage is at http://192.168.66.6:9000')
 def step_impl(context):
-        raise NotImplementedError(u'STEP: Given the homepage is at http://localhost:8000')
+        raise NotImplementedError(u'STEP: Given the homepage is at http://192.168.66.6:9000')
 
 @given(u'I load the homepage')
 def step_impl(context):
