@@ -6,7 +6,7 @@ E-zine managament platform
 Mission:
 -------
 Kickstart LiBRE! again!
-Checkout this PDF: https://atlantic777.lugons.org/libre_mail.pdf
+Checkout this PDF: https://atlantic777.lugons.org/liberator_mail.pdf
 
 
 Contact:
