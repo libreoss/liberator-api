@@ -2,5 +2,5 @@ django
 django-cors-headers
 djangorestframework
 git+https://github.com/mekanix/drf-extensions
-django-rest-framework-jwt
+djangorestframework-jwt
 psycopg2
