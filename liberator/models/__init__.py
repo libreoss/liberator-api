@@ -1,5 +1,5 @@
 from .article import Article
-from .comment import Comment 
+from .comment import Comment
 from .content import Content
 from .media import Media
 from .issue import Issue

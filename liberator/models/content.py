@@ -8,8 +8,9 @@ from .state import State
 
 import django.utils.timezone as timezone
 
+
 class Content(models.Model):
-    
+
     article = models.ForeignKey(Article, related_name="contents")
 
     language = models.ForeignKey(Language)
@@ -19,7 +20,7 @@ class Content(models.Model):
     date = models.DateField(default=timezone.now())
 
     title = models.CharField(max_length=64)
-    
+
     text = models.CharField(max_length=16384)
 
     state = models.ForeignKey(State)
