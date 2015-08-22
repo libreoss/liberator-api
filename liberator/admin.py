@@ -3,28 +3,22 @@ from django.contrib import admin
 
 from .models import (
     Article,
-    ArticleContent,
-    ArticleState,
-    ArticleTitle,
+    Comment,
+    Content,
+    Media,
     Issue,
-    IssueTitle,
     Language,
     Section,
-    SectionTitle,
-    Serie,
-    SerieTitle
+    State,
 )
 
 
 admin.site.register(Article)
-admin.site.register(ArticleContent)
-admin.site.register(ArticleState)
-admin.site.register(ArticleTitle)
+admin.site.register(Comment)
+admin.site.register(Content)
+admin.site.register(Media)
 admin.site.register(Issue)
-admin.site.register(IssueTitle)
 admin.site.register(Language)
 admin.site.register(Section)
-admin.site.register(SectionTitle)
-admin.site.register(Serie)
-admin.site.register(SerieTitle)
+admin.site.register(State)
 admin.site.register(get_user_model())

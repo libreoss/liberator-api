@@ -1,6 +1,9 @@
-from .article import Article, ArticleContent, ArticleState, ArticleTitle
-from .issue import Issue, IssueTitle
+from .article import Article
+from .comment import Comment
+from .content import Content
+from .media import Media
+from .issue import Issue
 from .language import Language
-from .section import Section, SectionTitle
-from .serie import Serie, SerieTitle
+from .section import Section
+from .state import State
 from .user import User
