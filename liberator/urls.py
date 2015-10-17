@@ -5,15 +5,15 @@ from . import views
 
 
 router = DefaultRouter()
-router.register(r'languages', views.LanguageViewSet)
-router.register(r'article-states', views.ArticleStateViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'articles', views.ArticleViewSet)
-router.register(r'issues', views.IssueViewSet)
-router.register(r'sections', views.SectionViewSet)
-router.register(r'series', views.SerieViewSet)
-router.register(r'titles', views.ArticleTitleViewSet)
-
+# router.register(r'languages', views.LanguageViewSet)
+# router.register(r'article-states', views.ArticleStateViewSet)
+# router.register(r'issues', views.IssueViewSet)
+# router.register(r'sections', views.SectionViewSet)
+# router.register(r'series', views.SerieViewSet)
+# router.register(r'titles', views.ArticleTitleViewSet)
+#
 urlpatterns = patterns(
     '',
     url(
@@ -31,11 +31,11 @@ urlpatterns = patterns(
         r'^v1/token-refresh/',
         'rest_framework_jwt.views.refresh_jwt_token'
     ),
-    url(
-        r'^$',
-        include(
-            'rest_framework.urls',
-            namespace='rest_framework',
-        ),
-    ),
+    # url(
+    #     r'^$',
+    #     include(
+    #         'rest_framework.urls',
+    #         namespace='rest_framework',
+    #     ),
+    # ),
 )

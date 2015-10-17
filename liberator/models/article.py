@@ -12,6 +12,6 @@ class Article(models.Model):
         related_name="articles"
     )
 
-    section = models.ForeignKey(Section, related_name="articles")
+    section = models.ForeignKey(Section, related_name="articles", null=True, blank=True)
 
-    issue = models.ManyToManyField(Issue, related_name="articles")
+    issue = models.ManyToManyField(Issue, related_name="articles", null=True, blank=True)

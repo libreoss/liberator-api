@@ -6,13 +6,15 @@ from .language import LanguageFactory
 
 class SerieFactory(factory.Factory):
     class Meta:
-        model = liberator.models.Serie
+        pass
+        # model = liberator.models.Serie
 
 
 class SerieTitleFactory(factory.Factory):
     class Meta:
-        model = liberator.models.SerieTitle
+        pass
+        # model = liberator.models.SerieTitle
 
-    serie = factory.SubFactory(SerieFactory)
-    language = factory.SubFactory(LanguageFactory)
+    # serie = factory.SubFactory(SerieFactory)
+    # language = factory.SubFactory(LanguageFactory)
     title = 'Title'

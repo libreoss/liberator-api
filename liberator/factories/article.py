@@ -11,24 +11,27 @@ class ArticleFactory(factory.Factory):
 
 class ArticleStateFactory(factory.Factory):
     class Meta:
-        model = liberator.models.ArticleState
+        pass
+        # model = liberator.models.ArticleState
 
     name = 'published'
 
 
 class ArticleTitleFactory(factory.Factory):
     class Meta:
-        model = liberator.models.ArticleTitle
+        pass
+        # model = liberator.models.ArticleTitle
 
-    article = factory.SubFactory(ArticleFactory)
-    language = factory.SubFactory(LanguageFactory)
+    # article = factory.SubFactory(ArticleFactory)
+    # language = factory.SubFactory(LanguageFactory)
     title = 'Title'
 
 
 class ArticleContentFactory(factory.Factory):
     class Meta:
-        model = liberator.models.ArticleContent
+        pass
+        # model = liberator.models.ArticleContent
 
-    article = factory.SubFactory(ArticleFactory)
-    language = factory.SubFactory(LanguageFactory)
-    content = 'Content'
+    # article = factory.SubFactory(ArticleFactory)
+    # language = factory.SubFactory(LanguageFactory)
+    # content = 'Content'

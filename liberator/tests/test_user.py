@@ -1,14 +1,25 @@
-from . import TestCase
-from liberator.factories import UserFactory
+from rest_framework.test import APITestCase
+from liberator.factories import UserFactory, AdminFactory
 
 
-class TestLanguage(TestCase):
-    def test_create_language(self):
+class TestUser(APITestCase):
+    def setUp(self):
+        super(TestUser, self).setUp()
+
+        self.admin = AdminFactory()
+
+        self.client.force_authenticate(user=self.admin)
+
+    def test_read_user(self):
+        url = '/api/v1/users/'
+        response = self.client.get(url)
+        self.assertFalse(len(response.data) == 0)
+
+    def test_read_user_details(self):
         user = UserFactory()
         user.save()
+
         url = '/api/v1/users/{0}/'.format(user.pk)
-        user_api = self.client.get(url, **self.args)
-        self.assertEqual(user.pk, user_api.data['id'])
-        self.assertEqual(user.first_name, user_api.data['first_name'])
-        self.assertEqual(user.last_name, user_api.data['last_name'])
-        self.assertEqual(user.email, user_api.data['email'])
+        resp = self.client.get(url)
+
+        self.assertEqual(user.pk, resp.data['id'])
