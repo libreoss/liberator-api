@@ -1,23 +1,15 @@
+
 import factory
 
 import liberator.models
-from .language import LanguageFactory
-from datetime import datetime
 
+from .article import ArticleFactory 
+from .user import UserFactory 
+from .language import LanguageFactory
+from .state import StateFactory
 
 class IssueFactory(factory.Factory):
     class Meta:
-        pass
-        # model = liberator.models.Issue
+        model = liberator.models.Issue
+    name = "issue1"
 
-    publication_date = datetime.now()
-
-
-class IssueTitleFactory(factory.Factory):
-    class Meta:
-        pass
-        # model = liberator.models.IssueTitle
-
-    # issue = factory.SubFactory(IssueFactory)
-    # language = factory.SubFactory(LanguageFactory)
-    title = 'Title'
