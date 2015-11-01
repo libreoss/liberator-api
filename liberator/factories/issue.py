@@ -1,5 +1,6 @@
 
 import factory
+import datetime
 
 import liberator.models
 
@@ -12,4 +13,4 @@ class IssueFactory(factory.Factory):
     class Meta:
         model = liberator.models.Issue
     name = "issue1"
-
+    publication_date = factory.LazyAttribute(lambda o: datetime.datetime.utcnow())
