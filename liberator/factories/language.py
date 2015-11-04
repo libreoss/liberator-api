@@ -1,9 +1,10 @@
-import liberator.models
+
+
 import factory
 
+import liberator.models
 
 class LanguageFactory(factory.Factory):
     class Meta:
         model = liberator.models.Language
-
-    name = 'English'
+    name = "language1" 
