@@ -2,10 +2,11 @@ from rest_framework import serializers
 
 from liberator import models
 
-class SectionSerializer(serializers.ModelSerializer):
+class StateSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = models.Section
+        model = models.State
         fields = (
             "name",
+            "order"
         )
