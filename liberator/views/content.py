@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from liberator import serializers
 
 
-class ContentViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+class ContentViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.CommentSerializer
 

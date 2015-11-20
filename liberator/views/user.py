@@ -6,7 +6,7 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 from liberator import serializers
 
 
-class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     """
     User endpoint view
     """

@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from liberator import serializers
 
 
-class IssueViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+class IssueViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.IssueSerializer
 
