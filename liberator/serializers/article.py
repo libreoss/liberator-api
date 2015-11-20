@@ -18,7 +18,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         read_only=True, 
         view_name='content-detail'
     )
-    comments = CommentSerializer(many=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.Article
