@@ -13,6 +13,7 @@ class ContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Content
         fields = (
+            "id",
             "article",
             "language",
             "author", 

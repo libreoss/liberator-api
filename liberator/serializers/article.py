@@ -23,6 +23,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Article
         fields = (
+            "id",
             "authors", 
             "section",
             "issues",

@@ -7,6 +7,7 @@ class StateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.State
         fields = (
+            "id",
             "name",
             "order"
         )

@@ -7,5 +7,6 @@ class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Language
         fields = (
+            "id",
             "name"
         )

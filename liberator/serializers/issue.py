@@ -7,8 +7,8 @@ class IssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Issue
         fields = (
+            "id",
             "name",
             "special", 
-            "published", 
-            "publishing_date"
+            "publication_date"
         )
