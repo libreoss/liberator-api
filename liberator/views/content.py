@@ -5,6 +5,6 @@ from liberator import serializers
 
 class ContentViewSet(viewsets.ModelViewSet):
 
-    serializer_class = serializers.CommentSerializer
+    serializer_class = serializers.ContentSerializer
 
     queryset = serializer_class.Meta.model.objects.all()
