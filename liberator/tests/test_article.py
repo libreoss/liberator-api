@@ -34,7 +34,9 @@ class TestArticle(APITestCase):
 
     def test_article_update(self):
         request = {
-            "author": self.admin.email,
+            "authors": [
+                self.admin.email,
+            ],
         }
         url = "/api/v1/articles/%d/" % self.article.pk
         response = self.client.post(url, request)
