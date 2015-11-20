@@ -7,13 +7,14 @@ from . import views
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'articles', views.ArticleViewSet)
-# router.register(r'languages', views.LanguageViewSet)
-# router.register(r'article-states', views.ArticleStateViewSet)
-# router.register(r'issues', views.IssueViewSet)
-# router.register(r'sections', views.SectionViewSet)
-# router.register(r'series', views.SerieViewSet)
-# router.register(r'titles', views.ArticleTitleViewSet)
-#
+router.register(r'languages', views.LanguageViewSet)
+router.register(r'states', views.StateViewSet)
+router.register(r'issues', views.IssueViewSet)
+router.register(r'sections', views.SectionViewSet)
+router.register(r'comments', views.CommentViewSet)
+router.register(r'contents', views.ContentViewSet)
+router.register(r'media', views.MediaViewSet)
+
 urlpatterns = patterns(
     '',
     url(
