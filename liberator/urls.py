@@ -1,10 +1,10 @@
 from django.conf.urls import patterns, url, include
 from rest_framework.routers import DefaultRouter
+from rest_framework_nested import routers
 
 from . import views
 
-
-router = DefaultRouter()
+router = routers.SimpleRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'articles', views.ArticleViewSet)
 router.register(r'languages', views.LanguageViewSet)
@@ -15,6 +15,9 @@ router.register(r'comments', views.CommentViewSet)
 router.register(r'contents', views.ContentViewSet)
 router.register(r'media', views.MediaViewSet)
 
+sections_router = routers.NestedSimpleRouter(router, r'sections', lookup='section')
+sections_router.register(r'articles', views.SectionArticleViewSet, base_name='section-article')
+
 urlpatterns = patterns(
     '',
     url(
@@ -23,6 +26,15 @@ urlpatterns = patterns(
             router.urls,
         ),
     ),
+
+    # Nested section endpoints
+    url(
+        r'^v1/',
+        include(
+            sections_router.urls,
+        ),
+    ),
+
     url(
         r'^v1/auth/',
         'rest_framework_jwt.views.obtain_jwt_token',
