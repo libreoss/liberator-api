@@ -40,6 +40,7 @@ class TestArticle(APITestCase):
         }
         url = "/api/v1/articles/%d/" % self.article.pk
         response = self.client.post(url, request)
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["id"], self.article.pk)
     
     def test_article_delete(self):

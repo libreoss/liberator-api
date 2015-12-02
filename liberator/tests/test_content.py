@@ -31,11 +31,13 @@ class TestContent(APITestCase):
     def test_article_revsions(self):
         url = "/api/v1/articles/%d/%d/revisions/" % (self.article.pk, self.language.pk)
         response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
         self.assertGreater(len(response.data), 0)
     
     def test_article_latest(self):
         url = "/api/v1/articles/%d/%d/latest/" % (self.article.pk, self.language.pk)
         response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["id"], self.content.pk)
         self.assertEqual(response.data["article"], self.article.pk)
     
@@ -73,5 +75,6 @@ class TestContent(APITestCase):
         }
         url = "/api/v1/contents/%d/" % self.content.pk
         response = self.client.post(url, request)
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["id"], self.article.pk)
     

@@ -17,4 +17,5 @@ class TestContent(APITestCase):
 
     def test_article_media_list(self):
         response = self.client.get("/api/v1/articles/%d/" % self.article.pk)
+        self.assertTrue("media" in response.data)
         self.assertGreater(len(response.data["media"]), 0)

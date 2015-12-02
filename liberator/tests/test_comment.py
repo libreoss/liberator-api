@@ -23,7 +23,7 @@ class TestComment(APITestCase):
 
     def test_comment_create(self):
         request = {
-            "article": article.pk,
+            "article": self.article.pk,
             "author": self.admin.email,
             "text": "this is some comment", 
         }
@@ -34,6 +34,7 @@ class TestComment(APITestCase):
     def test_comment_get(self):
         url = "/api/v1/comment/%d/" % self.comment.pk
         response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["id"], self.comment.pk)
 
     def test_comment_delete(self):

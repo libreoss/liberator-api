@@ -46,4 +46,5 @@ class TestIssue(APITestCase):
 
     def test_issue_article_list(self):
         response = self.client.get("/api/v1/issues/%d/articles/" % self.issue.pk)
+        self.assertEqual(response.status_code, 200)
         self.assertGreater(len(response.data), 0)
