@@ -20,7 +20,7 @@ class TestArticle(APITestCase):
     def test_article_create(self):
         request = {
             "authors": [
-                self.admin.email
+                self.admin.pk
             ],
         }
         url = "/api/v1/articles/"
