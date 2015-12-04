@@ -76,5 +76,5 @@ class TestContent(APITestCase):
         url = "/api/v1/contents/%d/" % self.content.pk
         response = self.client.put(url, request)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data["id"], self.article.pk)
+        self.assertEqual(response.data["id"], self.content.pk)
     
