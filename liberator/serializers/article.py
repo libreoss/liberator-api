@@ -11,7 +11,7 @@ from .comment import *
 class ArticleSerializer(serializers.ModelSerializer):
     
     authors = serializers.PrimaryKeyRelatedField(many=True, queryset=UserSerializer.Meta.model.objects.all())
-    section = serializers.PrimaryKeyRelatedField(queryset=SectionSerializer.Meta.model.objects.all())
+    section = serializers.PrimaryKeyRelatedField(queryset=SectionSerializer.Meta.model.objects.all(), required=False)
     issues = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     contents = serializers.HyperlinkedRelatedField(
         many=True, 
