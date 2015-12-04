@@ -3,13 +3,16 @@ from rest_framework import serializers
 from liberator import models
 
 from .user import * 
+from .language import * 
+from .article import * 
+from .state import * 
 
 class ContentSerializer(serializers.ModelSerializer):
     
-    article = serializers.PrimaryKeyRelatedField(read_only=True)
-    language = serializers.PrimaryKeyRelatedField(read_only=True)
-    author = UserSerializer()
-    state = serializers.PrimaryKeyRelatedField(read_only=True)
+    article = serializers.PrimaryKeyRelatedField(queryset=ArticleSerializer.Meta.model.objects.all())
+    language = serializers.PrimaryKeyRelatedField(queryset=LanguageSerializer.Meta.model.objects.all())
+    author = serializers.PrimaryKeyRelatedField(queryset=UserSerializer.Meta.model.objects.all())
+    state = serializers.PrimaryKeyRelatedField(queryset=StateSerializer.Meta.model.objects.all())
     class Meta:
         model = models.Content
         fields = (
