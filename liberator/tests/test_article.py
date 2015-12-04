@@ -35,11 +35,11 @@ class TestArticle(APITestCase):
     def test_article_update(self):
         request = {
             "authors": [
-                self.admin.email,
+                self.admin.pk,
             ],
         }
         url = "/api/v1/articles/%d/" % self.article.pk
-        response = self.client.post(url, request)
+        response = self.client.put(url, request)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["id"], self.article.pk)
     

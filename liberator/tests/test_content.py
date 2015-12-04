@@ -50,7 +50,7 @@ class TestContent(APITestCase):
         request = {
             "article": self.article.pk,
             "language": self.language.pk,
-            "author": self.admin.email,
+            "author": self.admin.pk,
             "title": "Some title", 
             "text": "some text",
             "state": self.state.pk,
@@ -68,13 +68,13 @@ class TestContent(APITestCase):
         request = {
             "article": self.article.pk,
             "language": self.language.pk,
-            "author": self.admin.email,
+            "author": self.admin.pk,
             "title": "Some title", 
             "text": "some text 1",
             "state": self.state.pk,
         }
         url = "/api/v1/contents/%d/" % self.content.pk
-        response = self.client.post(url, request)
+        response = self.client.put(url, request)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["id"], self.article.pk)
     
