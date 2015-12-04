@@ -17,7 +17,7 @@ class Content(models.Model):
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
 
-    date = models.DateField(default=timezone.now())
+    date = models.DateField(auto_now_add=True)
 
     title = models.CharField(max_length=64)
 
