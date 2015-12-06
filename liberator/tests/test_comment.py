@@ -32,7 +32,7 @@ class TestComment(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_comment_get(self):
-        url = "/api/v1/comment/%d/" % self.comment.pk
+        url = "/api/v1/comments/%d/" % self.comment.pk
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["id"], self.comment.pk)
