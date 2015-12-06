@@ -24,7 +24,7 @@ class TestComment(APITestCase):
     def test_comment_create(self):
         request = {
             "article": self.article.pk,
-            "author": self.admin.email,
+            "author": self.admin.pk,
             "text": "this is some comment", 
         }
         url = "/api/v1/comments/"

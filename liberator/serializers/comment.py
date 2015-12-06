@@ -4,10 +4,12 @@ from liberator import models
 
 from .user import * 
 
+from liberator.models import Article 
+
 class CommentSerializer(serializers.ModelSerializer):
     
-    article = serializers.PrimaryKeyRelatedField(read_only=True)
-    author = UserSerializer()
+    article = serializers.PrimaryKeyRelatedField(queryset=Article.objects.all())
+    author = serializers.PrimaryKeyRelatedField(queryset=UserSerializer.Meta.model.objects.all())
     class Meta:
         model = models.Comment
         fields = (
