@@ -10,3 +10,4 @@ from .state import *
 from .user import *
 from .section_article import * 
 from .issue_article import * 
+from .article_language import * 

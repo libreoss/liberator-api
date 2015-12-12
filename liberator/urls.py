@@ -21,6 +21,9 @@ sections_router.register(r'articles', views.SectionArticleViewSet, base_name='se
 issues_router = routers.NestedSimpleRouter(router, r'issues', lookup='issues')
 issues_router.register(r'articles', views.IssueArticleViewSet, base_name='issue-article')
 
+articles_router = routers.NestedSimpleRouter(router, r'articles', lookup='language')
+articles_router.register(r'languages', views.ArticleLanguageViewSet, base_name='article-language')
+
 urlpatterns = patterns(
     '',
     url(
@@ -41,6 +44,12 @@ urlpatterns = patterns(
         r'^v1/',
         include(
             issues_router.urls,
+        ),
+    ),
+    url(
+        r'^v1/',
+        include(
+            articles_router.urls,
         ),
     ),
 
