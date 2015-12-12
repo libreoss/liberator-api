@@ -29,17 +29,16 @@ class TestContent(APITestCase):
         self.content.save()
 
     def test_article_revsions(self):
-        url = "/api/v1/articles/%d/%d/revisions/" % (self.article.pk, self.language.pk)
+        url = "/api/v1/articles/%d/languages/%d/" % (self.article.pk, self.language.pk)
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertGreater(len(response.data), 0)
     
     def test_article_latest(self):
-        url = "/api/v1/articles/%d/%d/latest/" % (self.article.pk, self.language.pk)
+        url = "/api/v1/articles/%d/languages/latest/" % self.article.pk
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data["id"], self.content.pk)
-        self.assertEqual(response.data["article"], self.article.pk)
+        self.assertGreater(len(response.data), 0)
     
     def test_content_list(self):
         url = "/api/v1/contents/"
