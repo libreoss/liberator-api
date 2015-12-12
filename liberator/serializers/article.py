@@ -7,6 +7,7 @@ from .section import *
 from .user import * 
 from .comment import * 
 #from .content import * 
+from .media import * 
 
 class ArticleSerializer(serializers.ModelSerializer):
     
@@ -19,6 +20,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         view_name='content-detail'
     )
     comments = CommentSerializer(many=True, read_only=True)
+    media = MediaSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.Article
@@ -29,4 +31,5 @@ class ArticleSerializer(serializers.ModelSerializer):
             "issues",
             "comments",
             "contents",
+            "media",
         )

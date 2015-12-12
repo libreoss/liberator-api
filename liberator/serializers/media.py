@@ -11,6 +11,5 @@ class MediaSerializer(serializers.ModelSerializer):
         model = models.Media
         fields = (
             "id",
-            "name",
             "article"
         )
