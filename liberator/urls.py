@@ -18,6 +18,9 @@ router.register(r'media', views.MediaViewSet)
 sections_router = routers.NestedSimpleRouter(router, r'sections', lookup='section')
 sections_router.register(r'articles', views.SectionArticleViewSet, base_name='section-article')
 
+issues_router = routers.NestedSimpleRouter(router, r'issues', lookup='issues')
+issues_router.register(r'articles', views.IssueArticleViewSet, base_name='issue-article')
+
 urlpatterns = patterns(
     '',
     url(
@@ -32,6 +35,12 @@ urlpatterns = patterns(
         r'^v1/',
         include(
             sections_router.urls,
+        ),
+    ),
+    url(
+        r'^v1/',
+        include(
+            issues_router.urls,
         ),
     ),
 

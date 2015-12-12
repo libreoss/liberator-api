@@ -39,7 +39,7 @@ class TestIssue(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.data["id"], self.issue.pk)
  
-    def test_section_delete(self):
+    def test_issue_delete(self):
         url = "/api/v1/issues/%d/" % self.issue.pk
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 204)
