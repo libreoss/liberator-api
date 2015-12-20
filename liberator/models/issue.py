@@ -7,4 +7,4 @@ class Issue(models.Model):
 
     special = models.BooleanField(default=False)
 
-    publication_date = models.DateTimeField(blank=True)
+    publication_date = models.DateTimeField(blank=True, null=True)

@@ -53,7 +53,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     """
     A fully featured User model with admin-compliant permissions that uses
     a full-length email field as the username.
-
     Email and password are required. Other fields are optional.
     """
     email = models.EmailField(

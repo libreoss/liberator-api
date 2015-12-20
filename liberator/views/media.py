@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from liberator import serializers
 
 
-class SectionViewSet(viewsets.ModelViewSet):
+class MediaViewSet(viewsets.ModelViewSet):
 
-    serializer_class = serializers.SectionSerializer
+    serializer_class = serializers.MediaSerializer
 
     queryset = serializer_class.Meta.model.objects.all()

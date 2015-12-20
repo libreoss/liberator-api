@@ -1,11 +1,9 @@
-from .article import (
-    ArticleFactory,
-    ArticleStateFactory,
-    ArticleTitleFactory,
-    ArticleContentFactory,
-)
-from .language import LanguageFactory
-from .user import UserFactory
-from .issue import IssueFactory, IssueTitleFactory
-from .section import SectionFactory, SectionTitleFactory
-from .serie import SerieFactory, SerieTitleFactory
+from .article import *
+from .comment import *
+from .content import *
+from .issue import *
+from .language import *
+from .media import *
+from .section import *
+from .state import *
+from .user import *
