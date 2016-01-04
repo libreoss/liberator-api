@@ -15,14 +15,37 @@ router.register(r'comments', views.CommentViewSet)
 router.register(r'contents', views.ContentViewSet)
 router.register(r'media', views.MediaViewSet)
 
-sections_router = routers.NestedSimpleRouter(router, r'sections', lookup='section')
-sections_router.register(r'articles', views.SectionArticleViewSet, base_name='section-article')
+sections_router = routers.NestedSimpleRouter(
+    router,
+    r'sections',
+    lookup='section'
+)
+sections_router.register(
+    r'articles',
+    views.SectionArticleViewSet,
+    base_name='section-article'
+)
 
-issues_router = routers.NestedSimpleRouter(router, r'issues', lookup='issues')
-issues_router.register(r'articles', views.IssueArticleViewSet, base_name='issue-article')
+issues_router = routers.NestedSimpleRouter(
+    router, r'issues',
+    lookup='issues'
+)
+issues_router.register(
+    r'articles',
+    views.IssueArticleViewSet,
+    base_name='issue-article'
+)
 
-articles_router = routers.NestedSimpleRouter(router, r'articles', lookup='language')
-articles_router.register(r'languages', views.ArticleLanguageViewSet, base_name='article-language')
+articles_router = routers.NestedSimpleRouter(
+    router,
+    r'articles',
+    lookup='language'
+)
+articles_router.register(
+    r'languages',
+    views.ArticleLanguageViewSet,
+    base_name='article-language'
+)
 
 urlpatterns = patterns(
     '',
