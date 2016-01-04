@@ -62,11 +62,4 @@ urlpatterns = patterns(
         r'^v1/token-refresh/',
         'rest_framework_jwt.views.refresh_jwt_token'
     ),
-    # url(
-    #     r'^$',
-    #     include(
-    #         'rest_framework.urls',
-    #         namespace='rest_framework',
-    #     ),
-    # ),
 )

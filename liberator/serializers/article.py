@@ -6,7 +6,6 @@ from .issue import *
 from .section import * 
 from .user import * 
 from .comment import * 
-#from .content import * 
 from .media import * 
 
 class ArticleSerializer(serializers.ModelSerializer):
