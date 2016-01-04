@@ -1,7 +1,8 @@
 
-from rest_framework import status 
+from rest_framework import status
 from rest_framework.test import APITestCase
 from liberator.factories import *
+
 
 class TestIssue(APITestCase):
     def setUp(self):
@@ -13,7 +14,7 @@ class TestIssue(APITestCase):
 
         self.article = ArticleFactory()
         self.article.save()
-        
+
         self.issue = IssueFactory()
         self.issue.save()
 
@@ -23,7 +24,7 @@ class TestIssue(APITestCase):
     def test_issue_list(self):
         response = self.client.get("/api/v1/issues/")
         self.assertGreater(len(response.data), 0)
-    
+
     def test_issue_create(self):
         request = {
             "name": "Issue 1",
@@ -38,13 +39,15 @@ class TestIssue(APITestCase):
         url = "/api/v1/issues/%d/" % self.issue.pk
         response = self.client.get(url)
         self.assertEqual(response.data["id"], self.issue.pk)
- 
+
     def test_issue_delete(self):
         url = "/api/v1/issues/%d/" % self.issue.pk
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 204)
 
     def test_issue_article_list(self):
-        response = self.client.get("/api/v1/issues/%d/articles/" % self.issue.pk)
+        response = self.client.get(
+            "/api/v1/issues/%d/articles/" % self.issue.pk
+        )
         self.assertEqual(response.status_code, 200)
         self.assertGreater(len(response.data), 0)

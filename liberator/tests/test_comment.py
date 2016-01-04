@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from liberator.factories import *
 
+
 class TestComment(APITestCase):
     def setUp(self):
         super(TestComment, self).setUp()
@@ -10,11 +11,13 @@ class TestComment(APITestCase):
         self.admin.save()
 
         self.client.force_authenticate(user=self.admin)
-        
         self.article = ArticleFactory()
         self.article.save()
 
-        self.comment = CommentFactory(article = self.article, author=self.admin) 
+        self.comment = CommentFactory(
+            article=self.article,
+            author=self.admin
+        )
         self.comment.save()
 
     def test_comment_list(self):
@@ -25,7 +28,7 @@ class TestComment(APITestCase):
         request = {
             "article": self.article.pk,
             "author": self.admin.pk,
-            "text": "this is some comment", 
+            "text": "this is some comment",
         }
         url = "/api/v1/comments/"
         response = self.client.post(url, request)

@@ -7,4 +7,3 @@ class SectionFactory(factory.Factory):
     class Meta:
         model = liberator.models.Section
     name = "section1"
-
