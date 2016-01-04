@@ -2,20 +2,27 @@ from rest_framework import serializers
 
 from liberator import models
 
-from .user import * 
+from .user import *
 
-from liberator.models import Article 
+from liberator.models import Article
+
 
 class CommentSerializer(serializers.ModelSerializer):
-    
-    article = serializers.PrimaryKeyRelatedField(queryset=Article.objects.all())
-    author = serializers.PrimaryKeyRelatedField(queryset=UserSerializer.Meta.model.objects.all())
+
+    article = serializers.PrimaryKeyRelatedField(
+        queryset=Article.objects.all()
+    )
+    author = serializers.PrimaryKeyRelatedField(
+        queryset=UserSerializer.Meta.model.objects.all()
+    )
+
     class Meta:
+
         model = models.Comment
         fields = (
             "id",
             "article",
-            "author", 
-            "date", 
+            "author",
+            "date",
             "text"
         )

@@ -3,13 +3,13 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from liberator.factories import UserFactory, AdminFactory, ArticleFactory
 
+
 class TestArticle(APITestCase):
     def setUp(self):
         super(TestArticle, self).setUp()
         self.admin = AdminFactory()
         self.client.force_authenticate(user=self.admin)
         self.admin.save()
-        
         self.article = ArticleFactory()
         self.article.save()
 
@@ -42,7 +42,7 @@ class TestArticle(APITestCase):
         response = self.client.put(url, request)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["id"], self.article.pk)
-    
+
     def test_article_delete(self):
         url = "/api/v1/articles/%d/" % self.article.pk
         response = self.client.delete(url)

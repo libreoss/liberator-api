@@ -2,6 +2,7 @@
 from rest_framework.test import APITestCase
 from liberator.factories import *
 
+
 class TestContent(APITestCase):
     def setUp(self):
         super(TestContent, self).setUp()
@@ -12,7 +13,6 @@ class TestContent(APITestCase):
 
         self.article = ArticleFactory()
         self.article.save()
-        
         self.media = MediaFactory(article=self.article)
         self.media.save()
 

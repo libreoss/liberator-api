@@ -3,13 +3,13 @@ from liberator.factories import UserFactory, AdminFactory
 
 from liberator.models import User
 
+
 class TestUser(APITestCase):
     def setUp(self):
         super(TestUser, self).setUp()
         self.admin = AdminFactory()
         self.client.force_authenticate(user=self.admin)
         self.admin.save()
-        
         self.user = UserFactory()
         self.user.save()
 
