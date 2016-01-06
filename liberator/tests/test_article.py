@@ -18,6 +18,7 @@ class TestArticle(APITestCase):
         self.article = ArticleFactory()
         self.article.save()
         self.issue = IssueFactory()
+        self.issue.save()
 
     def test_article_list(self):
         response = self.client.get("/api/v1/articles/")
@@ -28,6 +29,7 @@ class TestArticle(APITestCase):
             "authors": [
                 self.admin.pk
             ],
+            "issues": []
         }
         url = "/api/v1/articles/"
         response = self.client.post(url, request)
@@ -57,6 +59,7 @@ class TestArticle(APITestCase):
             "authors": [
                 self.admin.pk,
             ],
+            "issues": []
         }
         url = "/api/v1/articles/%d/" % self.article.pk
         response = self.client.put(url, request)
