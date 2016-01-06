@@ -39,7 +39,7 @@ issues_router.register(
 articles_router = routers.NestedSimpleRouter(
     router,
     r'articles',
-    lookup='language'
+    lookup='article'
 )
 articles_router.register(
     r'languages',

@@ -24,7 +24,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     )
     issues = PrimaryKeyRelatedField(
         many=True,
-        read_only=True
+        queryset=models.Issue.objects.all()
     )
     contents = serializers.HyperlinkedRelatedField(
         many=True,
