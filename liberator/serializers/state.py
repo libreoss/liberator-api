@@ -3,13 +3,12 @@ from rest_framework import serializers
 from liberator import models
 
 
-class IssueSerializer(serializers.ModelSerializer):
+class StateSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Issue
+        model = models.State
         fields = (
             "id",
             "name",
-            "special",
-            "publication_date"
+            "order"
         )

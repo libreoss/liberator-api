@@ -111,7 +111,7 @@ DOKUWIKI_URL = "http://192.168.66.6"
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-NOSE_ARGS = ['liberator', ]
+NOSE_ARGS = ['liberator', '--nologcapture', '--nocapture', ]
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),

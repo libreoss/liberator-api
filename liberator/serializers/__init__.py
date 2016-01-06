@@ -1,11 +1,10 @@
-from .article import (
-    ArticleSerializer,
-    ArticleStateSerializer,
-    ArticleTitleSerializer,
-    ArticleContentSerializer
-)
-from .issue import IssueSerializer, IssueTitleSerializer
-from .language import LanguageSerializer
-from .section import SectionSerializer, SectionTitleSerializer
-from .serie import SerieSerializer, SerieTitleSerializer
-from .user import UserSerializer
+
+from .article import *
+from .comment import *
+from .content import *
+from .issue import *
+from .language import *
+from .media import *
+from .section import *
+from .state import *
+from .user import *

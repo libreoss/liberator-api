@@ -1,21 +1,17 @@
-import factory
 
+import factory
+import datetime
+from factory import LazyAttribute
 import liberator.models
+
+from .article import ArticleFactory
+from .user import UserFactory
 from .language import LanguageFactory
-from datetime import datetime
+from .state import StateFactory
 
 
 class IssueFactory(factory.Factory):
     class Meta:
         model = liberator.models.Issue
-
-    publication_date = datetime.now()
-
-
-class IssueTitleFactory(factory.Factory):
-    class Meta:
-        model = liberator.models.IssueTitle
-
-    issue = factory.SubFactory(IssueFactory)
-    language = factory.SubFactory(LanguageFactory)
-    title = 'Title'
+    name = "issue1"
+    publication_date = LazyAttribute(lambda o: datetime.datetime.utcnow())

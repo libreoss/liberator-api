@@ -4,3 +4,4 @@ djangorestframework
 git+https://github.com/mekanix/drf-extensions
 djangorestframework-jwt
 psycopg2
+drf-nested-routers
