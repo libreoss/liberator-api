@@ -5,5 +5,6 @@ RUN ssh-keygen -q -t rsa -N '' -f id_rsa
 RUN mkdir /code
 WORKDIR /code
 ADD requirements.txt /code/
-RUN pip install -r requirements.txt
+ADD requirements-dev.txt /code/
+RUN pip install -r requirements.txt && pip install -r requirements-dev.txt
 ADD . /code/
