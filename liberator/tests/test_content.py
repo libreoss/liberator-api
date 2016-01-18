@@ -40,6 +40,7 @@ class TestContent(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertGreater(len(response.data), 0)
+        self.assertEqual(response.data[0]["article"], self.article.pk)
 
     def test_content_list(self):
         url = "/api/v1/contents/"

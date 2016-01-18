@@ -25,14 +25,13 @@ class ArticleLanguageViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @list_route()
-    def latest(self, request, pk=None, language_pk=None):
+    def latest(self, request, article_pk=None):
         languages = Language.objects.all()
-        contents = []
+        contents = [] 
         for lang in languages:
             content = self.queryset.filter(
-                article=pk
-            ).filter(
-                language=lang
+                article=article_pk,
+                language=lang.pk
             ).order_by("date").last()
             contents.append(content)
         serializer = self.serializer_class(contents, many=True)

@@ -18,4 +18,4 @@ class Article(models.Model):
                                 null=True, blank=True
                                 )
 
-    issues = models.ManyToManyField(Issue, related_name="articles")
+    issues = models.ManyToManyField(Issue, related_name="articles", null=True, blank=True)
