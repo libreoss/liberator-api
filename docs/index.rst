@@ -12,8 +12,11 @@ Contents:
    :maxdepth: 2
 
    install
+   apidoc/liberator
 
 
+.. automodule:: liberator.models
+   :members:
 
 
 Indices and tables
