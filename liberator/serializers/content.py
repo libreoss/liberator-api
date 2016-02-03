@@ -16,8 +16,8 @@ class ContentSerializer(serializers.ModelSerializer):
     language = serializers.PrimaryKeyRelatedField(
         queryset=LanguageSerializer.Meta.model.objects.all()
     )
-    author = serializers.PrimaryKeyRelatedField(
-        queryset=UserSerializer.Meta.model.objects.all()
+    author = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
     )
     state = serializers.PrimaryKeyRelatedField(
         queryset=StateSerializer.Meta.model.objects.all()
