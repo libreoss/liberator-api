@@ -60,6 +60,18 @@ class TestContent(APITestCase):
         response = self.client.post(url, request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_content_create_default_user(self):
+        request = {
+            "article": self.article.pk,
+            "language": self.language.pk,
+            "title": "Some title",
+            "text": "some text",
+            "state": self.state.pk,
+        }
+        url = "/api/v1/contents/"
+        response = self.client.post(url, request)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    
     def test_content_get(self):
         url = "/api/v1/contents/%d/" % self.content.pk
         response = self.client.get(url)
