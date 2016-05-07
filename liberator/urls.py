@@ -50,7 +50,7 @@ articles_router.register(
 urlpatterns = patterns(
     '',
     url(
-        r'^v1/',
+        r'',
         include(
             router.urls,
         ),
@@ -58,31 +58,31 @@ urlpatterns = patterns(
 
     # Nested section endpoints
     url(
-        r'^v1/',
+        r'',
         include(
             sections_router.urls,
         ),
     ),
     url(
-        r'^v1/',
+        r'',
         include(
             issues_router.urls,
         ),
     ),
     url(
-        r'^v1/',
+        r'',
         include(
             articles_router.urls,
         ),
     ),
 
     url(
-        r'^v1/auth/',
+        r'^auth/',
         'rest_framework_jwt.views.obtain_jwt_token',
         name='login',
     ),
     url(
-        r'^v1/token-refresh/',
+        r'^token-refresh/',
         'rest_framework_jwt.views.refresh_jwt_token'
     ),
 )

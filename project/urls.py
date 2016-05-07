@@ -7,7 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(
-        r'^api/',
+        r'^api/v1/',
         include(
             'liberator.urls',
         )
