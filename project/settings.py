@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'liberator',
+    'limbo',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,7 +113,7 @@ DOKUWIKI_URL = "http://192.168.66.6"
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-NOSE_ARGS = ['liberator', '--nologcapture', '--nocapture', ]
+NOSE_ARGS = ['liberator', "limbo", '--nologcapture', '--nocapture', ]
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),

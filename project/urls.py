@@ -13,6 +13,12 @@ urlpatterns = patterns(
         )
     ),
     url(
+        r'^api/v1/',
+        include(
+            'limbo.urls',
+        )
+    ),
+    url(
         r'^admin/',
         include(admin.site.urls)
     ),
