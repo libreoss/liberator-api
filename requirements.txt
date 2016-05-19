@@ -5,3 +5,4 @@ drf-extensions
 djangorestframework-jwt
 psycopg2
 drf-nested-routers
+pyenchant
