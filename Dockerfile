@@ -10,4 +10,5 @@ ADD requirements-dev.txt /code/
 RUN pip install -r requirements.txt && pip install -r requirements-dev.txt && pip install uwsgi 
 ADD . /code/
 RUN groupadd -r liberator && useradd -r -g liberator liberator
+RUN mkdir -m 777 -p /var/db/liberator/dictionaries/
 USER liberator

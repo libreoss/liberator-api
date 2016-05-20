@@ -25,7 +25,9 @@ class LimboViewSet(viewsets.ViewSet):
         if wordlist.is_valid():
             for w in wordlist.data["words"]:
                 dictionary.add_word(w["word"])
-        return Response(wordlist.data)
+            return Response(wordlist.data, status=201)
+        else:
+            return Response(status=400)
 
 
     def retrieve(self, request, pk=None):
@@ -48,8 +50,21 @@ class LimboViewSet(viewsets.ViewSet):
         if wordlist.is_valid():
             for w in wordlist.data["words"]:
                 dictionary.ignore_word(w["word"])
-            return Response(data=wordlist.data)
+            return Response(status=204)
     
+    def update(self, request, pk=None):
+        """
+        Add word to local dictionary
+        """
+        dictionary = Dictionary(pk)
+        wordlist = LimboSerializer(data=request.data)
+        if wordlist.is_valid():
+            for w in wordlist["words"]:
+                dictionary.add_word(w["word"])
+            return Response(status=201)
+        else:
+            return Response(status=400)
+
     @detail_route(methods=['post'])
     def check(self, request, pk=None):
         wordlist = LimboSerializer(data=request.data)

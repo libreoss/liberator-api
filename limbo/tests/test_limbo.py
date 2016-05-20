@@ -2,10 +2,14 @@
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from liberator.factories import * 
 
 class TestLimbo(APITestCase):
     def setUp(self):
         super(TestLimbo, self).setUp()
+        self.admin = AdminFactory()
+        self.client.force_authenticate(user=self.admin)
+        self.admin.save()
         # Setup ...
         self.username = "admin@example.com"
         self.username2 = "admin2@example.com"
@@ -27,7 +31,7 @@ class TestLimbo(APITestCase):
         request = {
             "words": self.words,
         }
-        url = "/api/v1/limbo//" % self.username2 
+        url = "/api/v1/limbo/%s/" % self.username2 
         response = self.client.post(url, request)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
     
