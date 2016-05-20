@@ -22,7 +22,7 @@ class Dictionary(object):
         self.dict.remove(word)
 
     def check(self, word):
-        return self.dict.check(word) or Dictionary.get_global_dictionary(search_path=self.search_path).check(word)
+        return self.dict.check(word) or Dictionary.get_global_dictionary(search_path=self.search_path).dict.check(word)
 
     def get_words(self):
         res = []
