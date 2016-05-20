@@ -4,9 +4,8 @@ from rest_framework_nested import routers
 
 from . import views
 
-router = routers.SimpleRouter()
+router = routers.DefaultRouter()
 router.register(r'limbo', views.LimboViewSet, base_name="limbo")
-
 
 urlpatterns = patterns(
     '',

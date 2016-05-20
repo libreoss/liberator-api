@@ -15,6 +15,8 @@ class LimboViewSet(viewsets.ViewSet):
         """
         Lists all dictionaries currently available
         """
+        l = Dictionary.dictionary_list()
+        return Response(data=l, status=200)
 
     def create(self, request):
         """
@@ -35,7 +37,10 @@ class LimboViewSet(viewsets.ViewSet):
         List of words for specified dictionary
         """
         dictionary = Dictionary(pk)
-        return Response(LimboSerializer(data={"words": dictionary.get_words()}).data)
+        return Response(
+            status=200,
+            data=LimboSerializer(data={"words": dictionary.get_words()}).data
+        )
 
     def destroy(self, request, pk=None):
         """
@@ -51,6 +56,8 @@ class LimboViewSet(viewsets.ViewSet):
             for w in wordlist.data["words"]:
                 dictionary.ignore_word(w["word"])
             return Response(status=204)
+        else: 
+            return Response(status=400)
     
     def update(self, request, pk=None):
         """

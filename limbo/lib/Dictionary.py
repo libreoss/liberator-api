@@ -3,6 +3,8 @@ import logging
 import enchant
 import json
 
+import os 
+
 class Dictionary(object):
     
     def __init__(self, dictname, search_path="/var/db/liberator/dictionaries/", tag="sh"):
@@ -13,6 +15,19 @@ class Dictionary(object):
             pwl=self.filepath,
             pel="%s/%s.ignore.txt" % (search_path, dictname)
         )
+    
+    def dictionary_list(search_path="/var/db/liberator/dictionaries/"):
+        files = os.listdir(search_path)
+        res = [] 
+        for f in files:
+            name = ""
+            for w in f:
+                if w == ".":
+                    break
+                name += w
+            if not name in res:
+                res.append(name)
+        return res
 
     def add_word(self, word):
         if not self.dict.check(word) and not Dictionary.get_global_dictionary(search_path=self.search_path).check(word):
