@@ -8,20 +8,21 @@ class TestLimbo(APITestCase):
     def setUp(self):
         super(TestLimbo, self).setUp()
 
-        #setup dictionaries 
-        dict1file = open("/var/db/liberator/dictionaries/admin.txt", "w")
-        dict1file.write("a")
-        dict1file.close()
-
         self.admin = AdminFactory()
         self.client.force_authenticate(user=self.admin)
         self.admin.save()
         # Setup ...
-        self.dictname = "admin"
-        self.dictname2 = "admin"
-        self.username = "admin@example.com"
+        self.username = self.admin.email
         self.username2 = "admin2@example.com"
+        self.dictname = self.username.replace(".", "_")
+        self.dictname2 = self.username2.replace(".", "_")
+        self.dictname2 = "admin2@example_com"
         self.words = [{"word": "a"}, {"word": "b"}, {"word": "cc"}]
+        
+        #setup dictionaries 
+        dict1file = open("/var/db/liberator/dictionaries/%s.txt" % self.dictname, "w")
+        dict1file.write("a")
+        dict1file.close()
 
     def test_limbo_word_list(self):
         response = self.client.get("/api/v1/limbo/%s/" % self.dictname)

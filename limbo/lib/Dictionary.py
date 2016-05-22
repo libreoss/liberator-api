@@ -15,6 +15,7 @@ class Dictionary(object):
             pwl=self.filepath,
             pel="%s/%s.ignore.txt" % (search_path, dictname)
         )
+        self.dictname = dictname
     
     def dictionary_list(search_path="/var/db/liberator/dictionaries/"):
         files = os.listdir(search_path)
@@ -52,3 +53,6 @@ class Dictionary(object):
 
     def get_global_dictionary(search_path="/var/db/liberator/dictionaries/"):
         return Dictionary("GLOBAL", search_path, "sh")
+
+    def is_owner(self, email):
+        return self.dictname == email.replace(".", "_")

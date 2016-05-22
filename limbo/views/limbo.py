@@ -67,14 +67,17 @@ class LimboViewSet(viewsets.ViewSet):
         Add word to local dictionary
         """
         dictionary = Dictionary(pk)
-        wordlist = LimboSerializer(data=request.data)
-        if wordlist.is_valid():
-            words = wordlist.validated_data["words"]
-            for w in words:
-                dictionary.add_word(w["word"])
-            return Response(status=201)
+        if dictionary.is_owner(request.user.email):
+            wordlist = LimboSerializer(data=request.data)
+            if wordlist.is_valid():
+                words = wordlist.validated_data["words"]
+                for w in words:
+                    dictionary.add_word(w["word"])
+                return Response(status=201)
+            else:
+                return Response(status=400)
         else:
-            return Response(status=400)
+            return Response(status=403)
 
     @detail_route(methods=['post'])
     def check(self, request, pk=None):
