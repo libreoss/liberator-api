@@ -84,9 +84,12 @@ class LimboViewSet(viewsets.ViewSet):
         wordlist = LimboSerializer(data=request.data)
         dictionary = Dictionary(pk)
         res = []
-        for w in wordlist.data["words"]:
-            if dictionary.check(w["word"]):
-                res.append({"word": w["word"], "ok": True, "suggestions": []})
-            else:
-                res.append({"word": w["word"], "ok": False, "suggestions": dictionary.get_suggestions(w)})
-        return Response(data=res)
+        if wordlist.is_valid():
+            for w in wordlist.validated_data["words"]:
+                if dictionary.check(w["word"]):
+                    res.append({"word": w["word"], "ok": True, "suggestions": []})
+                else:
+                    res.append({"word": w["word"], "ok": False, "suggestions": dictionary.get_suggestions(w["word"])})
+                return Response(data={"words": res})
+        else:
+            return Response(status=400)

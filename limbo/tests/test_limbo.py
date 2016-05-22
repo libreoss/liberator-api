@@ -52,3 +52,11 @@ class TestLimbo(APITestCase):
         url = "/api/v1/limbo/"
         response = self.client.post(url, request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_check(self):
+        request = {
+            "words": self.words,
+        }
+        url = "/api/v1/limbo/%s/check/" % self.dictname 
+        response = self.client.post(url, request)
+        self.assertEqual(response.data["words"][0]["ok"], True)
