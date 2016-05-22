@@ -22,3 +22,4 @@ class AdminFactory(factory.Factory):
         model = liberator.models.User
 
     is_staff = True
+    email = "test_admin@example.com"
