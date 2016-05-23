@@ -1,2 +1,2 @@
-from .LimboSerializer import * 
-from .WordSerializer import * 
+from .LimboSerializer import *
+from .WordSerializer import *

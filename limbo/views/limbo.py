@@ -9,8 +9,9 @@ from limbo.serializers import LimboSerializer
 
 from limbo.lib import Dictionary
 
+
 class LimboViewSet(viewsets.ViewSet):
-    
+
     def list(self, request):
         """
         Lists all dictionaries currently available
@@ -34,7 +35,6 @@ class LimboViewSet(viewsets.ViewSet):
         else:
             return Response(status=400)
 
-
     def retrieve(self, request, pk=None):
         """
         List of words for specified dictionary
@@ -47,7 +47,7 @@ class LimboViewSet(viewsets.ViewSet):
 
     def destroy(self, request, pk=None):
         pass
-    
+
     def update(self, request, pk=None):
         """
         Add word to local dictionary
@@ -73,17 +73,26 @@ class LimboViewSet(viewsets.ViewSet):
         if wordlist.is_valid():
             for w in wordlist.validated_data["words"]:
                 if dictionary.check(w["word"]):
-                    res.append({"word": w["word"], "ok": True, "suggestions": []})
+                    res.append({
+                        "word": w["word"],
+                        "ok": True,
+                        "suggestions": []
+                    })
                 else:
-                    res.append({"word": w["word"], "ok": False, "suggestions": dictionary.get_suggestions(w["word"])})
+                    res.append({
+                        "word": w["word"],
+                        "ok": False,
+                        "suggestions": dictionary.get_suggestions(w["word"])
+                    })
                 return Response(data={"words": res})
         else:
             return Response(status=400)
-    
+
     @detail_route(methods=['post'])
     def ignore(self, request, pk=None):
         """
-        Removes word from specified dictionary (specify 'global' for global dictionary)
+        Removes word from specified dictionary
+        (specify 'global' for global dictionary)
         """
         dictionary = None
         if pk == "global":
@@ -95,5 +104,5 @@ class LimboViewSet(viewsets.ViewSet):
             for w in wordlist.data["words"]:
                 dictionary.ignore_word(w["word"])
             return Response(status=202)
-        else: 
+        else:
             return Response(status=400)

@@ -3,10 +3,11 @@ import logging
 import enchant
 import json
 
-import os 
+import os
+
 
 class Dictionary(object):
-    
+
     def __init__(self, dictname, search_path="/var/db/liberator/dictionaries/", tag="sh"):
         self.filepath = search_path + "/" + dictname + ".txt"
         self.search_path = search_path
@@ -16,10 +17,10 @@ class Dictionary(object):
             pel="%s/%s.ignore.txt" % (search_path, dictname)
         )
         self.dictname = dictname
-    
+
     def dictionary_list(search_path="/var/db/liberator/dictionaries/"):
         files = os.listdir(search_path)
-        res = [] 
+        res = []
         for f in files:
             name = ""
             for w in f:
