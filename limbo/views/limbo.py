@@ -46,21 +46,7 @@ class LimboViewSet(viewsets.ViewSet):
         )
 
     def destroy(self, request, pk=None):
-        """
-        Removes word from specified dictionary (specify 'global' for global dictionary)
-        """
-        dictionary = None
-        if pk == "global":
-            dictionary = Dictionary.get_global_dictionary()
-        else:
-            dictionary = Dictionary(pk)
-        wordlist = LimboSerializer(data=request.data)
-        if wordlist.is_valid():
-            for w in wordlist.data["words"]:
-                dictionary.ignore_word(w["word"])
-            return Response(status=204)
-        else: 
-            return Response(status=400)
+        pass
     
     def update(self, request, pk=None):
         """
@@ -92,4 +78,22 @@ class LimboViewSet(viewsets.ViewSet):
                     res.append({"word": w["word"], "ok": False, "suggestions": dictionary.get_suggestions(w["word"])})
                 return Response(data={"words": res})
         else:
+            return Response(status=400)
+    
+    @detail_route(methods=['post'])
+    def ignore(self, request, pk=None):
+        """
+        Removes word from specified dictionary (specify 'global' for global dictionary)
+        """
+        dictionary = None
+        if pk == "global":
+            dictionary = Dictionary.get_global_dictionary()
+        else:
+            dictionary = Dictionary(pk)
+        wordlist = LimboSerializer(data=request.data)
+        if wordlist.is_valid():
+            for w in wordlist.data["words"]:
+                dictionary.ignore_word(w["word"])
+            return Response(status=202)
+        else: 
             return Response(status=400)

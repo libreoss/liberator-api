@@ -22,6 +22,7 @@ class TestLimbo(APITestCase):
         #setup dictionaries 
         dict1file = open("/var/db/liberator/dictionaries/%s.txt" % self.dictname, "w")
         dict1file.write("a")
+        dict1file.write("b")
         dict1file.close()
 
     def test_limbo_word_list(self):
@@ -60,3 +61,11 @@ class TestLimbo(APITestCase):
         url = "/api/v1/limbo/%s/check/" % self.dictname 
         response = self.client.post(url, request)
         self.assertEqual(response.data["words"][0]["ok"], True)
+
+    def test_destroy(self):
+        request = {
+            "words": self.words,
+        }
+        url = "/api/v1/limbo/%s/ignore/" % self.dictname 
+        response = self.client.post(url, request)
+        self.assertEqual(response.status_code, 202)
