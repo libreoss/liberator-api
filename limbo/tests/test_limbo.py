@@ -62,6 +62,7 @@ class TestLimbo(APITestCase):
         url = "/api/v1/limbo/%s/check/" % self.dictname
         response = self.client.post(url, request)
         self.assertEqual(response.data["words"][0]["ok"], True)
+        self.assertEqual(len(response.data["words"]), 3)
 
     def test_destroy(self):
         request = {
