@@ -71,7 +71,8 @@ class LimboViewSet(viewsets.ViewSet):
         dictionary = Dictionary(pk)
         res = []
         if wordlist.is_valid():
-            for w in wordlist.validated_data["words"]:
+            ww = wordlist.data["words"]
+            for w in ww:
                 if dictionary.check(w["word"]):
                     res.append({
                         "word": w["word"],
@@ -84,7 +85,7 @@ class LimboViewSet(viewsets.ViewSet):
                         "ok": False,
                         "suggestions": dictionary.get_suggestions(w["word"])
                     })
-                return Response(data={"words": res})
+            return Response(data={"words": res})
         else:
             return Response(status=400)
 
