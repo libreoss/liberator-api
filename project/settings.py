@@ -94,6 +94,11 @@ LOGIN_URL = "/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/static/'
 
+# WARNING: This directory is place where media files are stored. For development purposes, it can be /tmp/.
+# For production, it should be something like /var/liberator/media/ or something like that.
+# It also has to be accessible via clients such that when clients sends GET apiurl/media/filename it should return /var/liberator/media/filename
+MEDIA_ROOT = "/tmp/"
+
 AUTH_USER_MODEL = 'liberator.User'
 REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',

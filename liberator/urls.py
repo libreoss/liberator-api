@@ -75,6 +75,8 @@ urlpatterns = patterns(
             articles_router.urls,
         ),
     ),
+    
+    url(r'^upload/(?P<articleId>\d+)/$', views.UploadMediaView.as_view()),
 
     url(
         r'^auth/',
