@@ -13,6 +13,7 @@ class CommentSerializer(serializers.ModelSerializer):
         queryset=Article.objects.all()
     )
     author = serializers.PrimaryKeyRelatedField(
+        default=serializers.CurrentUserDefault(),
         queryset=UserSerializer.Meta.model.objects.all()
     )
 
