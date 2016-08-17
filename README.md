@@ -34,6 +34,16 @@ Dev guidlines:
 - Upon `vagrant up` and `vagrant ssh` run `runserver.sh` and go to [Vagrant box](http://192.168.66.6:8000/api/v1/)
 - User/Pass is admin@example.com/Sekrit
 
+Deployment
+----------
+- Make sure that static files are collected 
+- Make directory for media with permissions such that docker/vagrant user can write there and set `MEDIA_ROOT` in settings.py
+- Turn off `DEBUG` in settings.py
+- Set your web server to point to static and media files correctly 
+- Set up your web server to work with UWSGI 
+- If running as docker container, make sure to edit docker-compose.yml correctly as described there.
+
+
 FAQ:
 ----
 - My user:pass for LiBRE! dokuwiki doesn't work in liberator! (dokuwiki sync will be on stand by for some time)
