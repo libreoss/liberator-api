@@ -3,6 +3,8 @@ db:
 web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
+    #command: sh bin/production.sh 9005
+    # Add - "9005:9005" ports for production
     volumes:
         - .:/code
     ports:
@@ -11,3 +13,4 @@ web:
         - db
     environment:
         - DJANGO_SETTINGS_MODULE=project.settings_docker
+

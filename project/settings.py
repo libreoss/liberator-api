@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'liberator',
+    'limbo',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -90,7 +91,13 @@ LOGIN_URL = "/"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/static/'
+
+# WARNING: This directory is place where media files are stored. For development purposes, it can be /tmp/.
+# For production, it should be something like /var/liberator/media/ or something like that.
+# It also has to be accessible via clients such that when clients sends GET apiurl/media/filename it should return /var/liberator/media/filename
+MEDIA_ROOT = "/tmp/"
 
 AUTH_USER_MODEL = 'liberator.User'
 REST_FRAMEWORK = {
@@ -111,7 +118,7 @@ DOKUWIKI_URL = "http://192.168.66.6"
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-NOSE_ARGS = ['liberator', ]
+NOSE_ARGS = ['liberator', "limbo", '--nologcapture', '--nocapture', ]
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),

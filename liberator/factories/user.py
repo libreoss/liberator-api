@@ -15,3 +15,11 @@ class UserFactory(factory.Factory):
             a.first_name,
             a.last_name
         ).lower())
+
+
+class AdminFactory(factory.Factory):
+    class Meta:
+        model = liberator.models.User
+
+    is_staff = True
+    email = "test_admin@example.com"

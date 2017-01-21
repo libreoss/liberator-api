@@ -1,48 +1,72 @@
-import liberator.models
-from . import TestCase
-import liberator.factories
+
+from rest_framework import status
+from rest_framework.test import APITestCase
+from liberator.factories import (
+    UserFactory,
+    AdminFactory,
+    ArticleFactory,
+    IssueFactory
+)
 
 
-class TestArticle(TestCase):
+class TestArticle(APITestCase):
     def setUp(self):
         super(TestArticle, self).setUp()
-        self.state = liberator.factories.ArticleStateFactory()
-        self.state.save()
-        self.language = liberator.factories.LanguageFactory()
-        self.language.save()
+        self.admin = AdminFactory()
+        self.client.force_authenticate(user=self.admin)
+        self.admin.save()
+        self.article = ArticleFactory()
+        self.article.save()
+        self.issue = IssueFactory()
+        self.issue.save()
 
-    def test_create_article(self):
-        article = liberator.factories.ArticleFactory(state=self.state)
-        article.save()
-        article_title = liberator.factories.ArticleTitleFactory(
-            article=article,
-            language=self.language
-        )
-        article_title.save()
-        article_content = liberator.factories.ArticleContentFactory(
-            article=article,
-            language=self.language
-        )
-        article_content.save()
-        url = '/api/v1/articles/{0}/'.format(article.id)
-        article_api = self.client.get(url, **self.args)
-        self.assertEqual(article.pk, article_api.data['id'])
-        self.assertEqual(article.state.id, article_api.data['state'])
-        title = article.titles.get(pk=article_title.pk)
-        title_api = article_api.data['titles'][0]
-        self.assertEqual(title.title, title_api['title'])
-        self.assertEqual(title.language.pk, title_api['language'])
-        content = article.contents.get(pk=article_content.pk)
-        content_api = article_api.data['contents'][0]
-        self.assertEqual(content.content, content_api['content'])
-        self.assertEqual(content.language.pk, content_api['language'])
+    def test_article_list(self):
+        response = self.client.get("/api/v1/articles/")
+        self.assertGreater(len(response.data), 0)
 
+    def test_article_create(self):
+        request = {
+            "authors": [
+                self.admin.pk
+            ],
+            "issues": []
+        }
+        url = "/api/v1/articles/"
+        response = self.client.post(url, request)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    
+    def test_article_create_with_issues(self):
+        request = {
+            "authors": [
+                self.admin.pk
+            ],
+            "issues": [
+                self.issue.pk
+            ]
+        }
+        url = "/api/v1/articles/"
+        response = self.client.post(url, request)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertGreater(len(response.data["issues"]), 0)
 
-class TestStateArticle(TestCase):
-    def test_create_article_state(self):
-        article_state = liberator.factories.ArticleStateFactory()
-        article_state.save()
-        url = '/api/v1/article-states/{0}/'.format(article_state.id)
-        article_state_api = self.client.get(url, **self.args)
-        self.assertEqual(article_state.pk, article_state_api.data['id'])
-        self.assertEqual(article_state.name, article_state_api.data['name'])
+    def test_article_get(self):
+        url = "/api/v1/articles/%d/" % self.article.pk
+        response = self.client.get(url)
+        self.assertEqual(response.data["id"], self.article.pk)
+
+    def test_article_update(self):
+        request = {
+            "authors": [
+                self.admin.pk,
+            ],
+            "issues": []
+        }
+        url = "/api/v1/articles/%d/" % self.article.pk
+        response = self.client.put(url, request)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["id"], self.article.pk)
+
+    def test_article_delete(self):
+        url = "/api/v1/articles/%d/" % self.article.pk
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 204)

@@ -13,6 +13,6 @@ class Comment(models.Model):
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
 
-    date = models.DateField(default=timezone.now())
+    date = models.DateField(auto_now_add=True)
 
     text = models.CharField(max_length=4096)
